@@ -9,6 +9,7 @@ class User
     private $super_admin;
     private $salt;
     private $password_hashed;
+    private $last_login;
 
     public function __construct($id)
     {
@@ -24,6 +25,7 @@ class User
         $this->super_admin = $user_data['super_admin'];
         $this->salt = $user_data['salt'];
         $this->password_hashed = $user_data['password'];
+        $this->last_login = $user_data['last_login'];
 
     }
 
@@ -45,5 +47,15 @@ class User
     public function getUsername()
     {
         return $this->username;
+    }
+
+    public function getAdmin()
+    {
+        return $this->admin;
+    }
+
+    public function getSuperAdmin()
+    {
+        return $this->super_admin;
     }
 }
