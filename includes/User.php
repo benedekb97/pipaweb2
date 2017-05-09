@@ -26,7 +26,6 @@ class User
         $this->salt = $user_data['salt'];
         $this->password_hashed = $user_data['password'];
         $this->last_login = $user_data['last_login'];
-
     }
 
     public function checkLogin($password)
