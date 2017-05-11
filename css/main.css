@@ -38,3 +38,20 @@ ul.navbar-nav li a:hover{
     background:#555;
     color:#e25300;
 }
+.modal-dialog{
+    background:#555;
+    border:#AAA;
+    -webkit-box-shadow: 5px 5px 5px 0px #222;
+    -moz-box-shadow: 5px 5px 5px 0px #222;
+    box-shadow: 5px 5px 5px 0px #222;
+    border-radius:5px 5px;
+}
+.modal-dialog .modal-header {
+    background: #e25300;
+    border: #666;
+}
+.modal-dialog .modal-footer{
+    background:#333;
+    border:#666;
+
+}

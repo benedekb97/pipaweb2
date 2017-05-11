@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Pipa.ml</a>
+            <a class="navbar-brand" href="#">Pipa.ml v<?= $version; ?>.r<?= $revision; ?></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
@@ -16,7 +16,18 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="login">Bejelentkezés</a>
+                    <?php
+                    if(!isset($current_user)){
+                        ?>
+                        <a href="#" role="button" data-toggle="modal" data-target="#login-modal">Bejelentkezés</a>
+                    <?php
+                    }else{
+                        ?>
+                        <a href="logout">Kijelentkezés</a>
+                    <?php
+                    }
+                    ?>
+
                 </li>
             </ul>
         </div>

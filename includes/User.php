@@ -57,4 +57,15 @@ class User
     {
         return $this->super_admin;
     }
+
+    public function getUuid()
+    {
+        return $this->oauth_internal_id;
+    }
+
+    public function setLastLogin()
+    {
+        global $mysql;
+        $mysql->query("UPDATE users SET last_login=NOW() WHERE id='$this->id'");
+    }
 }

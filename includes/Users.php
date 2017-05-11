@@ -27,6 +27,15 @@ class Users
         return null;
     }
 
+    public function getUserByUuid($uuid){
+        for ($i = 0; $i < $this->num_users; $i++) {
+            if ($this->users[$i]->getUuid() == $uuid) {
+                return $this->users[$i];
+            }
+        }
+        return null;
+    }
+
     public function __construct()
     {
         global $mysql;

@@ -10,3 +10,8 @@ $mysql = new mysqli($mysql_host, $mysql_username, $mysql_password, $mysql_databa
 if($mysql->error){
     die($mysql->error);
 }
+
+$mysql->query("SET NAMES utf8");
+
+$version = "0";
+$revision = "3";
