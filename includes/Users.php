@@ -68,7 +68,7 @@ class Users
             for ($i = 0; $i < rand(10, 30); $i++) {
                 $salt .= chr(rand(65, 97));
             }
-            $hashed_password = str_rot13(sha1(md5($password) . $salt));
+            $hashed_password = sha1(md5($password) . $salt);
 
             $query = $mysql->query("INSERT INTO users (username, salt, password) VALUES ('$username','$salt','$hashed_password')");
 
@@ -87,7 +87,7 @@ class Users
         global $mysql;
 
         if ($this->getUserByUsername($username) == null) {
-            $query = $mysql->query("INSERT INTO users (username, oauth_internal_id, name, email) VALUES ('$username','$oauth_internal_id','$name','$email')");
+            $query = $mysql->query("INSERT INTO users (username, oauth_internal_id, name, email, last_login) VALUES ('$username','$oauth_internal_id','$name','$email',NOW())");
 
             if ($query) {
                 $query = $mysql->query("SELECT * FROM users WHERE username='$username'");
@@ -95,6 +95,7 @@ class Users
                 $user_id = $query->fetch_assoc()['id'];
 
                 $this->users[] = new User($user_id);
+                return $user_id;
             }
         }
 

@@ -30,7 +30,8 @@ class User
 
     public function checkLogin($password)
     {
-        $hashed_password = str_rot13(sha1(md5($password) . $this->salt));
+        $hashed_password = sha1(md5($password) . $this->salt);
+        echo $hashed_password;
         if ($hashed_password == $this->password_hashed) {
             return true;
         } else {
