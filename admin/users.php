@@ -116,7 +116,7 @@ $users->addUserReg("csicska","meleg");
                                           method="POST">
                                         <input type="hidden" name="id" value="<?= $users->getUsers()[$i]->getId(); ?>"/>
                                         <input type="hidden" name="type" value="superadmin"/>
-                                        <button type="submit" class="btn btn-primary" data-toggle="tooltop"
+                                        <button type="submit" class="btn btn-primary" data-toggle="tooltip"
                                                 data-placement="top"
                                                 data-original-title="Superadmin jogosultság megvonása">
                                             <span class="fa fa-user"></span>
@@ -129,7 +129,7 @@ $users->addUserReg("csicska","meleg");
                                           method="POST">
                                         <input type="hidden" name="id" value="<?= $users->getUsers()[$i]->getId(); ?>"/>
                                         <input type="hidden" name="type" value="superadmin"/>
-                                        <button type="submit" class="btn btn-default" data-toggle="tooltop"
+                                        <button type="submit" class="btn btn-default" data-toggle="tooltip"
                                                 data-placement="top"
                                                 data-original-title="Superadmin jogosultság megadása">
                                             <span class="fa fa-user-o"></span>
