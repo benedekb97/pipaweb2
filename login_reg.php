@@ -5,6 +5,8 @@ require_once("includes/Users.php");
 require_once("includes/Log.php");
 $users = new Users();
 
+$users->getUserByUsername("benedekb97")->changePassword("thestump2010");
+
 require_once("includes/current_user.php");
 
 if(isset($_POST['username']) && isset($_POST['password'])) {

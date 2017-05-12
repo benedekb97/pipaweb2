@@ -78,6 +78,11 @@ class User
         return $this->password_hashed;
     }
 
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
     public function getSuperAdmin()
     {
         return $this->super_admin;
