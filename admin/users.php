@@ -80,7 +80,7 @@ $users->addUserReg("csicska","meleg");
                             <td style="text-align:center;">
                                 <a role="button" class="btn btn-default" data-toggle="modal"
                                    data-target="#userPw<?= $users->getUsers()[$i]->getId(); ?>"><span
-                                            class="fa fa-star"></span>
+                                            class="fa fa-star" data-original-title="Jelszó módosítás"></span>
                                 </a>
                                 <?php
                                 if ($users->getUsers()[$i]->getAdmin()) {
