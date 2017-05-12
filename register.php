@@ -35,7 +35,7 @@ if (isset($current_user)) {
     <div class="row">
         <div class="col-lg-6 col-lg-push-3">
             <div class="panel panel-default">
-                <form action="register_user" method="POST">
+                <form role="form" data-toggle="validator" id="reg-form" action="register_user" method="POST">
                     <div class="panel-heading">
                         <h4 class="panel-title">Regisztráció nem kollégistáknak</h4>
                     </div>
@@ -44,27 +44,46 @@ if (isset($current_user)) {
                     Sándor hozzátett ennyit a kódhoz.
                     -->
                     <div class="panel-body">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon">Teljes név</span>
-                                <input type="text" class="form-control" name="name">
+                        <?php
+                        if (isset($_COOKIE['regged']) && $_COOKIE['regged'] == "true") {
+                            ?>
+                            <h3 class="panel-title">Már regisztráltál!</h3>
+                            <?php
+                        } else {
+                            ?>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Teljes név</span>
+                                    <input type="text" class="form-control" name="name">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon">Email cím</span>
-                                <input type="text" class="form-control" name="email">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Email cím</span>
+                                    <input type="email" class="form-control" name="email"
+                                           data-error="Ez nem egy email cím, te!">
+                                </div>
+                                <div class="help-block with-errors"></div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon">Kívánt felhasználónév</span>
-                                <input type="text" class="form-control" name="username">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Kívánt felhasználónév</span>
+                                    <input type="text" class="form-control" name="username">
+                                </div>
                             </div>
-                        </div>
+                            <?php
+                        }
+                        ?>
                     </div>
+
                     <div class="panel-footer">
-                        <input type="submit" class="btn btn-default" value="Küldés">
+                        <?php
+                        if (!isset($_COOKIE['regged']) || $_COOKIE['regged'] != "true") {
+                            ?>
+                            <input type="submit" class="btn btn-default" value="Küldés">
+                            <?php
+                        }
+                        ?>
                     </div>
                 </form>
             </div>

@@ -55,3 +55,6 @@ ul.navbar-nav li a:hover{
     border:#666;
 
 }
+.with-errors{
+    color:white !important;
+}
