@@ -11,7 +11,6 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
     $username = $mysql->real_escape_string($_POST['username']);
     $password = $mysql->real_escape_string($_POST['password']);
     if($users->getUserByUsername($username) != null) {
-        var_dump($users->getUserByUsername($username));
         if($users->getUserByUsername($username)->checkLogin($password)) {
             $_SESSION['uuid'] = $users->getUserByUsername($username)->getId();
             $log = new Log($users->getUserByUsername($username)->getId(), "login","reg login");

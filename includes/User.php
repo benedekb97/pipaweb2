@@ -47,6 +47,7 @@ class User
             for ($i = 0; $i < rand(10, 30); $i++) {
                 $this->salt .= chr(rand(65, 97));
             }
+            $mysql->query("UPDATE users SET salt='$this->salt' WHERE id='$this->id'");
         }
         $hashed_password = sha1(md5($password) . $this->salt);
         $mysql->query("UPDATE users SET password='$hashed_password' WHERE id='$this->id'");
