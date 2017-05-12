@@ -120,4 +120,21 @@ class Users
 
         $mysql->query("CREATE TABLE `pipaweb`.`users` ( `id` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(256) NOT NULL , `name` VARCHAR(256) NULL , `oauth_internal_id` VARCHAR(256) NULL , `admin` INT NOT NULL DEFAULT '0' , `password` VARCHAR(256) NULL , `salt` VARCHAR(256) NULL , `super_admin` INT NOT NULL DEFAULT '0' , `email` VARCHAR(256) NULL DEFAULT NULL , `easter_egg_id` INT NULL DEFAULT NULL , `last_login` DATETIME NULL DEFAULT NULL,  PRIMARY KEY (`id`)) ENGINE = InnoDB;");
     }
+
+    public function getUserNum()
+    {
+        return $this->num_users;
+    }
+
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    public function removeUser($id)
+    {
+        global $mysql;
+
+        $mysql->query("DELETE FROM users WHERE id='$id'");
+    }
 }

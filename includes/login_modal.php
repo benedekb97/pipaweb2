@@ -7,10 +7,10 @@
                 <h4 class="modal-title">Bejelentkezés</h4>
             </div>
             <div class="modal-body">
-                <button class="btn btn-success" href="login_auth" onClick="window.location = 'login';">AuthSCH-val
+                <button class="btn btn-success" href="login_auth" onClick="window.location = '/login';">AuthSCH-val
                 </button>
                 <hr size="2px">
-                <form action="login_reg" method="POST">
+                <form action="/login_reg" method="POST">
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">Felhasználónév</span>
@@ -31,7 +31,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                Nem vagy kolis? <a href="register">Igényelj felhasználót!</a>
+                Nem vagy VIKes? <a href="register">Igényelj felhasználót!</a>
             </div>
         </div>
     </div>

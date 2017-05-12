@@ -10,6 +10,7 @@ class User
     private $salt;
     private $password_hashed;
     private $last_login;
+    private $name;
 
     public function __construct($id)
     {
@@ -26,17 +27,34 @@ class User
         $this->salt = $user_data['salt'];
         $this->password_hashed = $user_data['password'];
         $this->last_login = $user_data['last_login'];
+        $this->name = $user_data['name'];
     }
 
     public function checkLogin($password)
     {
         $hashed_password = sha1(md5($password) . $this->salt);
-        echo $hashed_password;
         if ($hashed_password == $this->password_hashed) {
             return true;
         } else {
             return false;
         }
+    }
+
+    public function changePassword($password)
+    {
+        global $mysql;
+        if($this->salt == ""){
+            for ($i = 0; $i < rand(10, 30); $i++) {
+                $this->salt .= chr(rand(65, 97));
+            }
+        }
+        $hashed_password = sha1(md5($password) . $this->salt);
+        $mysql->query("UPDATE users SET password='$hashed_password' WHERE id='$this->id'");
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 
     public function getId()
@@ -54,6 +72,11 @@ class User
         return $this->admin;
     }
 
+    public function getPassword()
+    {
+        return $this->password_hashed;
+    }
+
     public function getSuperAdmin()
     {
         return $this->super_admin;
@@ -68,5 +91,29 @@ class User
     {
         global $mysql;
         $mysql->query("UPDATE users SET last_login=NOW() WHERE id='$this->id'");
+    }
+
+    public function setAdmin()
+    {
+        global $mysql;
+        if($this->admin=="1"){
+            $new_admin = 0;
+        }else{
+            $new_admin = 1;
+        }
+
+        $mysql->query("UPDATE users SET admin='$new_admin' WHERE id='$this->id'");
+    }
+
+    public function setSuperAdmin()
+    {
+        global $mysql;
+        if($this->super_admin=="1"){
+            $new_super_admin = 0;
+        }else{
+            $new_super_admin = 1;
+        }
+
+        $mysql->query("UPDATE users SET super_admin='$new_super_admin' WHERE id='$this->id'");
     }
 }

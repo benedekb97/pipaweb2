@@ -58,3 +58,6 @@ ul.navbar-nav li a:hover{
 .with-errors{
     color:white !important;
 }
+td{
+    vertical-align:middle !important;
+}

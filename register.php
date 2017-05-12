@@ -37,7 +37,7 @@ if (isset($current_user)) {
             <div class="panel panel-default">
                 <form role="form" data-toggle="validator" id="reg-form" action="register_user" method="POST">
                     <div class="panel-heading">
-                        <h4 class="panel-title">Regisztráció nem kollégistáknak</h4>
+                        <h4 class="panel-title">Regisztráció nem VIKeseknek</h4>
                     </div>
                     <!--
                     std::cout << "Beni melegeg"; //lol :o

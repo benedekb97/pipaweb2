@@ -23,7 +23,7 @@
                     <?php
                     }else{
                         ?>
-                        <a href="logout">Kijelentkezés</a>
+                        <a href="/logout">Kijelentkezés</a>
                     <?php
                     }
                     ?>
