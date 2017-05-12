@@ -14,8 +14,6 @@ $locations = new Locations();
 $pipes = new Pipes();
 $log = new Log(0, "index", "view");
 
-$users->addUserReg("pityu","fasz");
-
 include("includes/current_user.php");
 ?>
 <!DOCTYPE html>
