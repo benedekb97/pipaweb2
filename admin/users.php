@@ -16,7 +16,7 @@ if (!(isset($current_user) && $current_user->getSuperAdmin())) {
 
 $log = new Log($current_user->getId(), "admin users", "view");
 
-$users->addUserReg("csicska","meleg");
+$users->addUserReg("csicska", "meleg");
 
 ?>
 <!DOCTYPE html>
@@ -78,9 +78,11 @@ $users->addUserReg("csicska","meleg");
                                         class="fa fa-check"></span><?php } else { ?><span
                                         class="fa fa-times"></span><?php } ?></td>
                             <td style="text-align:center;">
-                                <a role="button" class="btn btn-default" data-toggle="modal"
-                                   data-target="#userPw<?= $users->getUsers()[$i]->getId(); ?>"><span
-                                            class="fa fa-star" data-original-title="Jelszó módosítás"></span>
+                                <a role="button" class="btn btn-default" data-toggle="tooltip"
+                                   data-original-title="Jelszó módisítása" data-placement="top">
+                                    <span data-target="#userPw<?= $users->getUsers()[$i]->getId(); ?>"
+                                          class="fa fa-star" title="Jelszó módosítás" data-toggle="modal"
+                                    ></span>
                                 </a>
                                 <?php
                                 if ($users->getUsers()[$i]->getAdmin()) {
@@ -141,7 +143,8 @@ $users->addUserReg("csicska","meleg");
                                 <form style="display:inline-block;" action="/admin/change_user" method="POST">
                                     <input type="hidden" name="type" value="delete">
                                     <input type="hidden" name="id" value="<?= $users->getUsers()[$i]->getId(); ?>">
-                                    <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" data-original-title="Felhasználó törlése">
+                                    <button type="submit" class="btn btn-danger" data-toggle="tooltip"
+                                            data-placement="top" data-original-title="Felhasználó törlése">
                                         <span class="fa fa-user-times"></span>
                                     </button>
                                 </form>
@@ -206,15 +209,15 @@ for ($i = 0; $i < $users->getUserNum(); $i++) {
         foreach($users->getUsers() as $user) {
         ?>
         function checkPassword<?= $user->getId(); ?>() {
-            if ($('#input<?= $user->getId(); ?>').val() != $('#inputMatch<?= $user->getid(); ?>').val() && $('#input<?= $user->getId(); ?>').val()!="" && $('#inputMatch<?= $user->getid(); ?>').val()!="") {
+            if ($('#input<?= $user->getId(); ?>').val() != $('#inputMatch<?= $user->getid(); ?>').val() && $('#input<?= $user->getId(); ?>').val() != "" && $('#inputMatch<?= $user->getid(); ?>').val() != "") {
                 $('#inputMatch<?= $user->getId(); ?>').css("background", "#ff3f4c");
             } else {
                 $('#inputMatch<?= $user->getId(); ?>').css("background", "white");
             }
-            if ($('#input<?= $user->getId(); ?>').val().length < 6 && $('#input<?= $user->getId(); ?>').val().length!=0) {
-                $('#input<?= $user->getId(); ?>').css("background","#ff3f4c");
-            }else{
-                $('#input<?= $user->getId(); ?>').css("background","white");
+            if ($('#input<?= $user->getId(); ?>').val().length < 6 && $('#input<?= $user->getId(); ?>').val().length != 0) {
+                $('#input<?= $user->getId(); ?>').css("background", "#ff3f4c");
+            } else {
+                $('#input<?= $user->getId(); ?>').css("background", "white");
             }
         }
 
