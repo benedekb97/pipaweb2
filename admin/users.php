@@ -81,8 +81,9 @@ $users->addUserReg("csicska", "meleg");
                                 <a role="button" class="btn btn-default" data-toggle="tooltip"
                                    data-original-title="Jelszó módisítása" data-placement="top">
                                     <span data-target="#userPw<?= $users->getUsers()[$i]->getId(); ?>"
-                                          class="fa fa-star" title="Jelszó módosítás" data-toggle="modal"
-                                    ></span>
+                                           title="Jelszó módosítás" data-toggle="modal"
+
+                                    ><i class="fa fa-star"></i></span>
                                 </a>
                                 <?php
                                 if ($users->getUsers()[$i]->getAdmin()) {
