@@ -20,9 +20,9 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
             header("Location: /");
             die();
         }
-        die("kurva");
+        header("Location: /");
     }
-    die("asd");
+    header("Location: /");
 }
 header("Location: /");
 die();
