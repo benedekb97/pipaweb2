@@ -1,7 +1,8 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -15,20 +16,25 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <?php
-                    if(!isset($current_user)){
-                        ?>
-                        <a href="#" role="button" data-toggle="modal" data-target="#login-modal">Bejelentkezés</a>
-                    <?php
-                    }else{
-                        ?>
-                        <a href="/logout">Kijelentkezés</a>
-                    <?php
-                    }
+                <?php
+                if (!isset($current_user)) {
                     ?>
+                    <li>
+                        <a href="#" role="button" data-toggle="modal" data-target="#login-modal">Bejelentkezés</a>
+                    </li>
+                    <?php
+                } else {
+                    ?>
+                    <li>
+                        <a href="/profile">Profilom</a>
+                    </li>
+                    <li>
+                        <a href="/logout">Kijelentkezés</a>
+                    </li>
+                    <?php
+                }
+                ?>
 
-                </li>
             </ul>
         </div>
     </div>
