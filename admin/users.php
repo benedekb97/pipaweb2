@@ -16,8 +16,6 @@ if (!(isset($current_user) && $current_user->getSuperAdmin())) {
 
 $log = new Log($current_user->getId(), "admin users", "view");
 
-$users->addUserReg("csicska", "meleg");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,13 +76,13 @@ $users->addUserReg("csicska", "meleg");
                                         class="fa fa-check"></span><?php } else { ?><span
                                         class="fa fa-times"></span><?php } ?></td>
                             <td style="text-align:center;">
-                                <a role="button" class="btn btn-default" data-toggle="tooltip"
-                                   data-original-title="Jelszó módisítása" data-placement="top">
-                                    <span data-target="#userPw<?= $users->getUsers()[$i]->getId(); ?>"
-                                           title="Jelszó módosítás" data-toggle="modal"
-
-                                    ><i class="fa fa-star"></i></span>
-                                </a>
+                                <span data-target="#userPw<?= $users->getUsers()[$i]->getId(); ?>"
+                                                                 title="Jelszó módosítás" data-toggle="modal">
+                                    <a role="button" class="btn btn-default" data-toggle="tooltip"
+                                       data-original-title="Jelszó módisítása" data-placement="top">
+                                        <i class="fa fa-star"></i>
+                                    </a>
+                                </span>
                                 <?php
                                 if ($users->getUsers()[$i]->getAdmin()) {
                                     ?>
