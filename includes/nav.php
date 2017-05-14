@@ -24,7 +24,15 @@
                     </li>
                     <?php
                 } else {
+                    if($current_user->getSuperAdmin()){
+                        ?>
+                        <li>
+                            <a href="/admin">Admin</a>
+                        </li>
+                        <?php
+                    }
                     ?>
+
                     <li>
                         <a href="/profile">Profilom</a>
                     </li>

@@ -18,9 +18,11 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
             header("Location: /");
             die();
         }
-        header("Location: /");
+        header("Location: /?login=true&password=true&username=$username");
+        die();
     }
-    header("Location: /");
+    header("Location: /?login=true&username=true");
+    die();
 }
-header("Location: /");
+header("Location: /?login=true");
 die();

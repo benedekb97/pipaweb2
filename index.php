@@ -31,5 +31,32 @@ include("includes/current_user.php");
 </div>
 <?php include("includes/login_modal.php"); ?>
 <?php include("includes/footer.php"); ?>
+<?php
+if(isset($_GET['login']) && $_GET['login']=="true"){
+    ?>
+    <script type="text/javascript">
+        <?php
+            if(isset($_GET['password']) && $_GET['password'] == "true"){
+                ?>
+        $('#login-modal').modal("show");
+        $('#login-username').val("<?= $_GET['username']; ?>");
+        $('#login-password').focus();
+        <?php
+            }elseif(isset($_GET['username']) && $_GET['username'] == "true"){
+                ?>
+        $('#login-modal').modal("show");
+        $('#login-username').focus();
+        <?php
+        }else{
+        ?>
+        $('#login-modal').modal("show");
+        $('#login-username').focus();
+        <?php
+        }
+        ?>
+    </script>
+<?php
+}
+?>
 </body>
 </html>

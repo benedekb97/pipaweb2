@@ -19,7 +19,7 @@ if (isset($current_user)) {
     $log = new Log($current_user->getId(), "profile", "view");
 } else {
     $log = new Log(0, "profile", "view_attempt");
-    header("Location: /");
+    header("Location: /?login=true");
     die("403: Not authorised");
 }
 ?>

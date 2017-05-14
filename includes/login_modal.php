@@ -14,13 +14,13 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">Felhasználónév</span>
-                            <input type="text" name="username" class="form-control">
+                            <input id="login-username" type="text" name="username" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">Jelszó</span>
-                            <input type="password" name="password" class="form-control">
+                            <input id="login-password" type="password" name="password" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">

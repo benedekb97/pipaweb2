@@ -9,6 +9,7 @@ $users = new Users();
 include("../includes/current_user.php");
 
 if(!(isset($current_user) && $current_user->getSuperAdmin())){
+    header("Location: /?login=true");
     die("403 - Not authorised!");
 }
 
