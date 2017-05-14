@@ -89,12 +89,7 @@ $log = new Log($current_user->getId(), "admin pipes", "view");
 <script type="text/javascript" language="javascript" src="/js/dataTables.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#pipes').dataTable(
-            {
-                "search":   false,
-                "ordering":  false
-            }
-        );
+        $('#pipes').dataTable();
     })
 </script>
 </body>

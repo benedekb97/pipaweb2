@@ -7,6 +7,16 @@ class Pipes
     private $pipes;
     private $num_pipes;
 
+    public function getCurrentPipe()
+    {
+        for($i = 0; $i < $this->num_pipes; $i ++){
+            if($this->pipes[$i]->getStatus()!="dead"){
+                return $this->pipes[$i];
+            }
+        }
+        return null;
+    }
+
     public function __construct()
     {
         global $mysql;
@@ -55,11 +65,25 @@ class Pipes
         global $mysql;
 
         $mysql->query("INSERT INTO pipes (type,created,created_by) VALUES ('$type',NOW(),'$user_id')");
-        echo $mysql->error;
+
+        $query = $mysql->query("SELECT * FROM pipes WHERE id=(SELECT max(id) FROM pipes)");
+        $data = $query->fetch_assoc();
+        $this->pipes[] = new Pipe($data['id']);
+        return $data['id'];
     }
 
     public function getPipes()
     {
         return $this->pipes;
+    }
+
+    public function getPipeById($id)
+    {
+        foreach($this->pipes as $pipe){
+            if($pipe->getId() == $id){
+                return $pipe;
+            }
+        }
+        return null;
     }
 }
