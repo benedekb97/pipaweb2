@@ -47,12 +47,19 @@ class Pipes
     {
         global $mysql;
 
-        $mysql->query("CREATE TABLE `pipaweb`.`pipes` ( `id` INT NOT NULL , `type` VARCHAR(256) NOT NULL , `created` DATETIME NOT NULL , `ready` INT NULL DEFAULT '0' , `dying` INT NULL DEFAULT '0' , `preparing` INT NULL DEFAULT '0' , `created_by` INT NOT NULL ) ENGINE = InnoDB;");
-        echo "asd";
+        $mysql->query("CREATE TABLE `pipaweb`.`pipes` ( `id` INT NOT NULL AUTO_INCREMENT , `type` VARCHAR(256) NOT NULL , `created` DATETIME NOT NULL , `ready` INT NULL DEFAULT '0' , `dying` INT NULL DEFAULT '0' , `preparing` INT NULL DEFAULT '0' , `created_by` INT NOT NULL ,  PRIMARY KEY (`id`)) ENGINE = InnoDB;");
     }
 
-    public function newPipe($type)
+    public function newPipe($type, $user_id)
     {
+        global $mysql;
 
+        $mysql->query("INSERT INTO pipes (type,created,created_by) VALUES ('$type',NOW(),'$user_id')");
+        echo $mysql->error;
+    }
+
+    public function getPipes()
+    {
+        return $this->pipes;
     }
 }

@@ -8,6 +8,7 @@ class Pipe
     private $ready;
     private $dying;
     private $preparing;
+    private $created_by;
 
     public function __construct($id)
     {
@@ -22,6 +23,27 @@ class Pipe
         $this->ready = $pipe_data['ready'];
         $this->dying = $pipe_data['dying'];
         $this->preparing = $pipe_data['preparing'];
+        $this->created_by = $pipe_data['created_by'];
 
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getCreatedBy()
+    {
+        return $this->created_by;
     }
 }
