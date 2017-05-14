@@ -11,12 +11,20 @@ require_once("includes/current_user.php");
 
 if (isset($current_user) && ($current_user->getAdmin() || $current_user->getSuperAdmin())) {
     if(isset($_POST['type']) && isset($_POST['time'])){
-        $new_id = $pipes->newPipe($_POST['type'],$current_user->getId());
+        $new_type = $mysql->real_escape_string($_POST['type']);
+        $new_time = $mysql->real_escape_string($_POST['time']);
+        $new_id = $pipes->newPipe($new_type,$current_user->getId());
         $pipes->getPipeById($new_id)->setCreatedAt($_POST['time']);
+        $log = new Log($current_user->getId(),"pipe","Type = $new_type; Time = $new_time");
     }
     header("Location: /redirect");
     die();
 }else{
+    if(isset($current_user)){
+        $log = new Log($current_user->getId(),"new_pipe","unauthorised new pipe add attempt");
+    }else{
+        $log = new Log(0,"new_pipe","unauthorised new pipe add attempt");
+    }
     header("Location: /?login=true");
     die();
 }

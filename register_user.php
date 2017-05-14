@@ -21,6 +21,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['username'])
     $username = $mysql->real_escape_string($_POST['username']);
     setcookie("regged", "true");
     if ($_COOKIE['regged'] != "true") {
+        $log = new Log(0,"register","New reg added");
         $regs->addReg($username, $email, $full_name);
     }
 }

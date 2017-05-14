@@ -10,6 +10,7 @@ include("includes/current_user.php");
 
 if (!(isset($current_user))) {
     header("Location: /?login=true");
+    $log = new Log(0,"change_password","unauthorised password change attempt");
     die("403 - Not authorised!");
 }
 
@@ -21,6 +22,7 @@ if ($current_user->getPassword()) {
 
         if ($current_user->checkLogin($old_password) && $password1 == $password2) {
             $current_user->changePassword($password1);
+            $log = new Log($current_user->getId(),"profile","password change");
         }
     }
 } else {
@@ -30,6 +32,7 @@ if ($current_user->getPassword()) {
 
         if($password1 == $password2){
             $current_user->changePassword($password1);
+            $log = new Log($current_user->getId(), "profile","added password");
         }
     }
 }
