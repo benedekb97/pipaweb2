@@ -12,7 +12,6 @@ require_once("includes/Settings.php");
 $users = new Users();
 $locations = new Locations();
 $pipes = new Pipes();
-$log = new Log(0, "index", "view");
 $settings = new Settings();
 
 if ($pipes->getCurrentPipe() != null) {
@@ -21,6 +20,13 @@ if ($pipes->getCurrentPipe() != null) {
 
 
 include("includes/current_user.php");
+if(isset($current_user)){
+
+    $log = new Log($current_user->getId(), "index", "view");
+}else{
+
+    $log = new Log(0, "index", "view");
+}
 ?>
 <!DOCTYPE html>
 <html lang="hu">
