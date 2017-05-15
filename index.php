@@ -82,6 +82,67 @@ if(isset($current_user)){
                     </div>
                 </form>
             </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Jelenlegi pipa:</h3>
+                    </div>
+                    <?php
+                    if(isset($current_pipe)){
+                        ?>
+                        <table class="table">
+                            <tr>
+                                <th>Dohány:</th>
+                                <td><?= $current_pipe->getType(); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Állapot:</th>
+                                <td><?= $current_pipe->getStatus(); ?></td>
+                            </tr>
+                        </table>
+                    <?php
+                    }else{
+                        ?>
+                        <div class="panel-body">
+                            Nincs jelenleg pipa :(
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
+            <?php
+        }else {
+            ?>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Jelenlegi pipa:</h3>
+                    </div>
+                    <?php
+                    if (isset($current_pipe)) {
+                        ?>
+                        <table class="table">
+                            <tr>
+                                <th>Dohány:</th>
+                                <td><?= $current_pipe->getType(); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Állapot:</th>
+                                <td><?= $current_pipe->getStatus(); ?></td>
+                            </tr>
+                        </table>
+                        <?php
+                    } else {
+                        ?>
+                        <div class="panel-body">
+                            Nincs jelenleg pipa :(
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
             <?php
         }
         ?>
