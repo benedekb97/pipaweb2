@@ -27,4 +27,14 @@ class Location
     {
         return $this->id;
     }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
 }

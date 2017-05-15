@@ -27,6 +27,12 @@ if(isset($current_user)){
 
     $log = new Log(0, "index", "view");
 }
+
+if(!isset($_GET['location'])){
+    $current_location = $locations->getLocationById(1);
+}else{
+    $current_location = $locations->getLocationById($_GET['location']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -37,6 +43,15 @@ if(isset($current_user)){
 <body>
 <div class="container">
     <?php include("includes/nav.php"); ?>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="text-align:center; color:white;"><?= $current_location->getName()." - ".$current_location->getDescription(); ?></h3>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <?php
         if (isset($current_user) && ($current_user->getAdmin() || $current_user->getSuperAdmin())) {

@@ -56,7 +56,7 @@ class Pipes
     {
         global $mysql;
 
-        $mysql->query("CREATE TABLE `pipaweb`.`pipes` ( `id` INT NOT NULL AUTO_INCREMENT , `type` VARCHAR(256) NOT NULL , `created` DATETIME NOT NULL , `ready` INT NULL DEFAULT '0' , `dying` INT NULL DEFAULT '0' , `preparing` INT NULL DEFAULT '0' , `created_by` INT NOT NULL ,  PRIMARY KEY (`id`)) ENGINE = InnoDB;");
+        $mysql->query("CREATE TABLE `pipaweb`.`pipes` ( `id` INT NOT NULL AUTO_INCREMENT , `type` VARCHAR(256) NOT NULL , `created` DATETIME NOT NULL , `ready` INT NULL DEFAULT '0' , `dying` INT NULL DEFAULT '0' , `preparing` INT NULL DEFAULT '0' , `created_by` INT NOT NULL , `location_id` INT NULL DEFAULT '1' , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
     }
 
     public function newPipe($type, $user_id)

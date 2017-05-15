@@ -11,6 +11,7 @@ class Pipe
     private $dying;
     private $preparing;
     private $created_by;
+    private $location_id;
 
     public function getStatus()
     {
@@ -50,6 +51,7 @@ class Pipe
         $this->dying = $pipe_data['dying'];
         $this->preparing = $pipe_data['preparing'];
         $this->created_by = $pipe_data['created_by'];
+        $this->location_id = $pipe_data['location_id'];
 
     }
 

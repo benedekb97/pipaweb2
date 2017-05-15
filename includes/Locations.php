@@ -58,6 +58,8 @@ class Locations
         global $mysql;
 
         $mysql->query("CREATE TABLE `pipaweb`.`locations` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(256) NOT NULL , `description` VARCHAR(256) NOT NULL , `pipe_id` INT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
+
+        $mysql->query("INSERT INTO locations (name, description) VALUES ('1020','A fehér VIKes kánaánja')");
     }
 
     public function addLocation($name,$description)
