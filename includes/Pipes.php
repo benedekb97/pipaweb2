@@ -30,8 +30,7 @@ class Pipes
             }
         }
         if($this->checkTable()) {
-            $query = $mysql->query("SELECT * FROM pipes");
-
+            $query = $mysql->query("SELECT * FROM pipes ORDER BY created DESC");
             $this->num_pipes = 0;
             while ($row = $query->fetch_assoc()) {
                 $this->pipes[] = new Pipe($row['id']);
