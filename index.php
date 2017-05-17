@@ -53,7 +53,7 @@ $statuses = [
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading" style="text-align:center;">
-                    <a class="panel-title" data-toggle="collapse" href="#locations" style="text-align:center; width:100%; color:white;"><?= $current_location->getName()." - ".$current_location->getDescription(); ?></a> &#x25BC;
+                    <a class="panel-title" data-toggle="collapse" href="#locations" style="text-align:center; width:100%; color:white;"><?= $current_location->getName()." - ".$current_location->getDescription(); ?> &#x25BC;</a>
                 </div>
                 <div class="panel-collapse collapse" id="locations">
                     <ul class="nav">

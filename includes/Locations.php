@@ -80,4 +80,11 @@ class Locations
             }
         }
     }
+
+    public function deleteLocation($id)
+    {
+        global $mysql;
+
+        $mysql->query("DELETE FROM locations WHERE id='$id'");
+    }
 }

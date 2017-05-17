@@ -4,9 +4,11 @@ include("../includes/init.php");
 include("../includes/Users.php");
 include("../includes/Pipes.php");
 include("../includes/Log.php");
+include("../includes/Locations.php");
 
 $users = new Users();
 $pipes = new Pipes();
+$locations = new Locations();
 
 include("../includes/current_user.php");
 
@@ -59,6 +61,7 @@ $log = new Log($current_user->getId(), "admin pipes", "view");
                         <th>Íz</th>
                         <th>Létrehozta</th>
                         <th>Létrehozva</th>
+                        <th>Helyszín</th>
                         <th style="text-align:center;">Műveletek</th>
                     </tr>
                     </thead>
@@ -68,6 +71,7 @@ $log = new Log($current_user->getId(), "admin pipes", "view");
                         <th>Íz</th>
                         <th>Létrehozta</th>
                         <th>Létrehozva</th>
+                        <th>Helyszín</th>
                         <th style="text-align:center;">Műveletek</th>
                     </tr>
                     </tfoot>
@@ -79,7 +83,8 @@ $log = new Log($current_user->getId(), "admin pipes", "view");
                             <td><?= $pipe->getId(); ?></td>
                             <td><?= $pipe->getType(); ?></td>
                             <td><?= $users->getUserById($pipe->getCreatedBy())->getName(); ?></td>
-                            <td><?= $pipe->getCreatedAt(); ?></td>
+                            <td><?= $pipe->getCreatedStatic(); ?></td>
+                            <td><?= $locations->getLocationById($pipe->getLocation())->getName(); ?></td>
                             <td style="text-align:center;">
                                 <span data-toggle="tooltip" data-placement="top" data-original-title="Pipa törlése">
                                     <button data-toggle="modal" data-target="#deletePipe<?= $pipe->getId(); ?>" class="btn btn-danger">
@@ -125,7 +130,7 @@ foreach($pipes->getPipes() as $pipe){
                         </tr>
                         <tr>
                             <td>Létrehozva</td>
-                            <td><?= $pipe->getcreatedAt(); ?></td>
+                            <td><?= $pipe->getCreatedStatic(); ?></td>
                         </tr>
                     </table>
                 </div>

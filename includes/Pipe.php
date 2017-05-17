@@ -12,6 +12,7 @@ class Pipe
     private $preparing;
     private $created_by;
     private $location_id;
+    private $created_static;
 
     public function getStatus()
     {
@@ -52,6 +53,7 @@ class Pipe
         $this->preparing = $pipe_data['preparing'];
         $this->created_by = $pipe_data['created_by'];
         $this->location_id = $pipe_data['location_id'];
+        $this->created_static = $pipe_data['created_static'];
 
     }
 
@@ -106,5 +108,10 @@ class Pipe
     public function getLocation()
     {
         return $this->location_id;
+    }
+
+    public function getCreatedStatic()
+    {
+        return $this->created_static;
     }
 }

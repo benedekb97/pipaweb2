@@ -6,3 +6,5 @@
         $('#reg-form').validator();
     });
 </script>
+
+<?php include("footer_text.php"); ?>
