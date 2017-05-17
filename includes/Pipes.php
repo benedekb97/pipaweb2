@@ -7,10 +7,10 @@ class Pipes
     private $pipes;
     private $num_pipes;
 
-    public function getCurrentPipe()
+    public function getCurrentPipe($location_id)
     {
         for($i = 0; $i < $this->num_pipes; $i ++){
-            if($this->pipes[$i]->getStatus()!="dead"){
+            if($this->pipes[$i]->getStatus()!="dead" && $this->pipes[$i]->getLocation()==$location_id){
                 return $this->pipes[$i];
             }
         }
@@ -59,11 +59,11 @@ class Pipes
         $mysql->query("CREATE TABLE `pipaweb`.`pipes` ( `id` INT NOT NULL AUTO_INCREMENT , `type` VARCHAR(256) NOT NULL , `created` DATETIME NOT NULL , `ready` INT NULL DEFAULT '0' , `dying` INT NULL DEFAULT '0' , `preparing` INT NULL DEFAULT '0' , `created_by` INT NOT NULL , `location_id` INT NULL DEFAULT '1' , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
     }
 
-    public function newPipe($type, $user_id)
+    public function newPipe($type, $user_id, $location_id)
     {
         global $mysql;
 
-        $mysql->query("INSERT INTO pipes (type,created,created_by) VALUES ('$type',NOW(),'$user_id')");
+        $mysql->query("INSERT INTO pipes (type,created,created_by,location_id) VALUES ('$type',NOW(),'$user_id','$location_id')");
 
         $query = $mysql->query("SELECT * FROM pipes WHERE id=(SELECT max(id) FROM pipes)");
         $data = $query->fetch_assoc();

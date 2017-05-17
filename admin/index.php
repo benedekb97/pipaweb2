@@ -40,6 +40,9 @@ $log = new Log($current_user->getId(), "admin", "view");
                     <li>
                         <a href="/admin/pipes">Pipák</a>
                     </li>
+                    <li>
+                        <a href="/admin/locations">Helyszínek</a>
+                    </li>
                 </ul>
             </div>
         </div>

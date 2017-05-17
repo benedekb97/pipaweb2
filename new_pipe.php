@@ -20,11 +20,12 @@ if (isset($current_user) && ($current_user->getAdmin() || $current_user->getSupe
     if(isset($_POST['type']) && isset($_POST['time'])){
         $new_type = $mysql->real_escape_string($_POST['type']);
         $new_time = $mysql->real_escape_string($_POST['time']);
-        $new_id = $pipes->newPipe($new_type,$current_user->getId());
+        $location = $mysql->real_escape_string($_POST['location']);
+        $new_id = $pipes->newPipe($new_type,$current_user->getId(),$location);
         $pipes->getPipeById($new_id)->setCreatedAt($_POST['time']);
         $log = new Log($current_user->getId(),"pipe","Type = $new_type; Time = $new_time");
     }
-    header("Location: /redirect");
+    header("Location: /redirect?location=$location");
     die();
 }else{
     if(isset($current_user)){

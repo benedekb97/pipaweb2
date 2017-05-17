@@ -7,6 +7,11 @@ class Locations
     private $locations;
     private $num_locations;
 
+    public function getLocations()
+    {
+        return $this->locations;
+    }
+
     public function __construct()
     {
         global $mysql;

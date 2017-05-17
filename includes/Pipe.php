@@ -102,4 +102,9 @@ class Pipe
         $mysql->query("UPDATE pipes SET created='$new_time' WHERE id='$this->id'");
         return true;
     }
+
+    public function getLocation()
+    {
+        return $this->location_id;
+    }
 }

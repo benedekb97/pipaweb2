@@ -14,11 +14,6 @@ $locations = new Locations();
 $pipes = new Pipes();
 $settings = new Settings();
 
-if ($pipes->getCurrentPipe() != null) {
-    $current_pipe = $pipes->getCurrentPipe();
-}
-
-
 include("includes/current_user.php");
 if(isset($current_user)){
 
@@ -33,6 +28,10 @@ if(!isset($_GET['location'])){
 }else{
     $current_location = $locations->getLocationById($_GET['location']);
 }
+
+if ($pipes->getCurrentPipe($current_location->getId()) != null) {
+    $current_pipe = $pipes->getCurrentPipe($current_location->getId());
+}
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -46,8 +45,21 @@ if(!isset($_GET['location'])){
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title" style="text-align:center; color:white;"><?= $current_location->getName()." - ".$current_location->getDescription(); ?></h3>
+                <div class="panel-heading" style="text-align:center;">
+                    <a class="panel-title" data-toggle="collapse" href="#locations" style="text-align:center; width:100%; color:white;"><?= $current_location->getName()." - ".$current_location->getDescription(); ?></a> &#x25BC;
+                </div>
+                <div class="panel-collapse collapse" id="locations">
+                    <ul class="nav">
+                        <?php
+                        foreach($locations->getLocations() as $location){
+                            ?>
+                            <li style="text-align:center;">
+                                <a href="<?= "/?location=".$location->getId(); ?>"><?= $location->getName(); ?> - <?= $location->getDescription(); ?></a>
+                            </li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -58,6 +70,7 @@ if(!isset($_GET['location'])){
             ?>
             <div class="col-lg-4">
                 <form id="change_pipe" action="<?php if(isset($current_pipe)){ echo '/change_pipe'; }else{ echo '/new_pipe'; } ?>" method="POST">
+                    <input type="hidden" name="location" value="<?= $current_location->getId(); ?>">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <?php

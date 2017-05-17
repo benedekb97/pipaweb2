@@ -21,7 +21,7 @@ $log = new Log($current_user->getId(), "admin users", "view");
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Pipa.ml - Admin</title>
+    <title>Pipa.ml - Felhasználók</title>
     <?php include("../includes/head.php"); ?>
 </head>
 <body>
@@ -39,6 +39,9 @@ $log = new Log($current_user->getId(), "admin users", "view");
                     </li>
                     <li>
                         <a href="/admin/pipes">Pipák</a>
+                    </li>
+                    <li>
+                        <a href="/admin/locations">Helyszínek</a>
                     </li>
                 </ul>
             </div>
