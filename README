@@ -1,2 +1,36 @@
+###########
+INFORMÁCIÓK
+###########
+
 Ez egy weboldal a 1020-nak ami nyilvántartja, hogy van-e pipa a 1020-ban :)
 Sanyi meg meleg.
+
+#########
+TELEPÍTÉS
+#########
+
+1. Apache beállítása:
+  a) Új virtual host létrehozása:
+    - isntall/XXX-pipaweb.conf fájl bemásolása /etc/apache2/sites-available mappába
+    - Nevezd át a számot a virtual hostjaidnak megfelelően
+    - Módosítsd benne a ServerName-t a saját elképzeléseidnek megfelelően
+    - ErrorLog és DocumentRoot átírása
+  b) ~sudo a2ensite XXX-pipaweb.conf
+  c) ~sudo service apache2 restart
+2. Hosts fájl beállítása:
+  a) ~sudo nano /etc/hosts
+  b) adj hozzá egy sort, hogy 127.0.0.1_TAB_[az előbb beállított ServerName]
+3. MySQL szerver beállítása (phpMyAdmin):
+  a) új felhasználó létrehozása (saját adatbázissal) pipaweb névvel
+  b) csatolt táblák beimportálása az adatbázisba (install/pipaweb.sql)
+4. init.php fájl átírása
+  a) includes/init.default.php fájlt másold le és nevezd át init.php névre
+  b) ~nano init.php
+  c) állítsd be a mysql_* változókat a MySQL szerveren beállított értékekre
+5. authSch.php fájl:
+  a) includes/authSch.default.php fájlt másold le és nevezd át authSch.php névre
+  b) Böngéssz az auth.sch.bme.hu oldalra és jelentkezz be
+  c) menj a fejlesztői konzol oldalra, és adj hozzá egy új weboldalt
+  d) adj neki, tetszőleges nevet és leírást, és az átirányítási címet állítsd be az előbb beállított ServerName szerint http://ServerName/login címre
+  e) kapsz majd egy azonosítót és egy kulcsot. az authSch.php-ben a $username legyen az azonosító, és a $password pedig a kulcs
+6. használd egészséggel :)
