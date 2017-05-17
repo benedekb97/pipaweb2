@@ -173,4 +173,11 @@ class User
             $mysql->query("UPDATE users SET admin_of='$this->admin_of' WHERE id='$this->id'");
         }
     }
+
+    public function setName($new_name)
+    {
+        global $mysql;
+
+        $mysql->query("UPDATE users SET name='$new_name' WHERE id='$this->id'");
+    }
 }

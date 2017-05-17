@@ -57,4 +57,26 @@ class Regs
 
         $mysql->query("INSERT INTO regs (username, email, full_name, ip) VALUES ('$username','$email','$full_name','$ip')");
     }
+
+    public function getRegs()
+    {
+        return $this->regs;
+    }
+
+    public function getRegById($id)
+    {
+        foreach($this->regs as $reg){
+            if($reg->getId() == $id){
+                return $reg;
+            }
+        }
+        return null;
+    }
+
+    public function deleteReg($id)
+    {
+        global $mysql;
+
+        $mysql->query("DELETE FROM regs WHERE id='$id'");
+    }
 }

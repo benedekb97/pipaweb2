@@ -22,5 +22,28 @@ class Reg
         $this->ip = $reg_data['ip'];
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function getFullName()
+    {
+        return $this->full_name;
+    }
+
+    public function getIp()
+    {
+        return $this->ip;
+    }
 }

@@ -43,6 +43,9 @@ $log = new Log($current_user->getId(), "admin", "view");
                     <li>
                         <a href="/admin/locations">Helyszínek</a>
                     </li>
+                    <li>
+                        <a href="/admin/registered_users">Regisztrációk</a>
+                    </li>
                 </ul>
             </div>
         </div>

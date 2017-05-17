@@ -78,6 +78,7 @@ class Users
                 $user_id = $query->fetch_assoc()['id'];
 
                 $this->users[] = new User($user_id);
+                $this->num_users++;
             }
         }
     }
