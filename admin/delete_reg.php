@@ -31,5 +31,5 @@ if(isset($_POST['id'])){
 
     $log = new Log($current_user->getId(),"delete reg",$id);
 }
-header("Location: /admin/regs");
+header("Location: /admin/registered_users");
 die();
