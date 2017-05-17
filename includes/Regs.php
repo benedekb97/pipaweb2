@@ -73,6 +73,11 @@ class Regs
         return null;
     }
 
+    public function getRegNum()
+    {
+        return $this->reg_num;
+    }
+
     public function deleteReg($id)
     {
         global $mysql;

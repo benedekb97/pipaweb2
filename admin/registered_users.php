@@ -53,7 +53,12 @@ if (!isset($current_user) || !$current_user->getSuperAdmin()) {
                         <a href="/admin/locations">Helyszínek</a>
                     </li>
                     <li>
-                        <a href="/admin/registered_users">Regisztrációk</a>
+                        <a href="/admin/registered_users">Regisztrációk
+                            <?php
+                            if($regs->getRegNum()!=0){
+                                echo "(".$regs->getRegNum().")";
+                            }
+                            ?></a>
                     </li>
                 </ul>
             </div>

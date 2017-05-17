@@ -4,9 +4,11 @@ require_once("../includes/init.php");
 require_once("../includes/Users.php");
 require_once("../includes/Pipes.php");
 require_once("../includes/Log.php");
+require_once("../includes/Regs.php");
 
 $users = new Users();
 $pipes = new Pipes();
+$regs = new Regs();
 
 require_once("../includes/current_user.php");
 
@@ -44,7 +46,12 @@ $log = new Log($current_user->getId(), "admin", "view");
                         <a href="/admin/locations">Helyszínek</a>
                     </li>
                     <li>
-                        <a href="/admin/registered_users">Regisztrációk</a>
+                        <a href="/admin/registered_users">Regisztrációk
+                            <?php
+                            if($regs->getRegNum()!=0){
+                                echo "(".$regs->getRegNum().")";
+                            }
+                            ?></a>
                     </li>
                 </ul>
             </div>
