@@ -13,6 +13,7 @@ class User
     private $password_hashed;
     private $last_login;
     private $name;
+    private $admin_of;
 
     public function __construct($id)
     {
@@ -30,6 +31,7 @@ class User
         $this->password_hashed = $user_data['password'];
         $this->last_login = $user_data['last_login'];
         $this->name = $user_data['name'];
+        $this->admin_of = $user_data['admin_of'];
     }
 
     public function checkLogin($password)
@@ -72,7 +74,15 @@ class User
 
     public function getAdmin()
     {
-        return $this->admin;
+        $admin_ar = explode(",",$this->admin_of);
+
+        foreach($admin_ar as $item){
+            if($item!=""){
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function getPassword()
@@ -127,6 +137,40 @@ class User
 
     public function isAdminOf($location_id)
     {
+        $admin_ar = explode(",",$this->admin_of);
+        $asd = "".$location_id;
+        if(in_array($asd,$admin_ar)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
+    public function addAdmin($location_id)
+    {
+        global $mysql;
+
+        $admin_ar = explode(",",$this->admin_of);
+        if(!in_array($location_id,$admin_ar)){
+            $this->admin_of .= ",".$location_id;
+            $mysql->query("UPDATE users SET admin_of='$this->admin_of' WHERE id='$this->id'");
+        }
+    }
+
+    public function removeAdmin($location_id)
+    {
+        global $mysql;
+
+        $admin_ar = explode(",",$this->admin_of);
+        $location_id = "".$location_id;
+        if(in_array($location_id,$admin_ar)){
+            $this->admin_of = "";
+            foreach($admin_ar as $ids){
+                if($ids!=$location_id){
+                    $this->admin_of .= ",".$ids;
+                }
+            }
+            $mysql->query("UPDATE users SET admin_of='$this->admin_of' WHERE id='$this->id'");
+        }
     }
 }

@@ -73,7 +73,7 @@ $statuses = [
     </div>
     <div class="row">
         <?php
-        if (isset($current_user) && ($current_user->getAdmin() || $current_user->getSuperAdmin())) {
+        if (isset($current_user) && ($current_user->isAdminOf($current_location->getId()) || $current_user->getSuperAdmin())) {
             ?>
             <div class="col-lg-4">
                 <form id="change_pipe" action="<?php if(isset($current_pipe)){ echo '/change_pipe'; }else{ echo '/new_pipe'; } ?>" method="POST">

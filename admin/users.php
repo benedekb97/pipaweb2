@@ -4,9 +4,11 @@ require_once("../includes/init.php");
 require_once("../includes/Users.php");
 require_once("../includes/Pipes.php");
 require_once("../includes/Log.php");
+require_once("../includes/Locations.php");
 
 $users = new Users();
 $pipes = new Pipes();
+$locations = new Locations();
 
 require_once("../includes/current_user.php");
 
@@ -52,112 +54,113 @@ $log = new Log($current_user->getId(), "admin users", "view");
                     <h4 class="panel-title">Felhasználók</h4>
                 </div>
                 <div class="table-responsive">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Felhasználónév</th>
-                        <th>Név</th>
-                        <th style="text-align:center;">AuthSCH</th>
-                        <th style="text-align:center;">Sima jelszó</th>
-                        <th style="text-align:center;">Admin</th>
-                        <th style="text-align:center;">Super-admin</th>
-                        <th style="text-align:center;">Műveletek</th>
-                    </tr>
-                    <?php
-                    for ($i = 0; $i < $users->getUserNum(); $i++) {
-                        ?>
+                    <table class="table table-striped">
                         <tr>
-                            <td><?= $users->getUsers()[$i]->getUsername(); ?></td>
-                            <td><?= $users->getUsers()[$i]->getName(); ?></td>
-                            <td style="text-align:center;"><?php if ($users->getUsers()[$i]->getUuid()) { ?><span
-                                        class="fa fa-check"></span><?php } else { ?><span
-                                        class="fa fa-times"></span><?php } ?></td>
-                            <td style="text-align:center;"><?php if ($users->getUsers()[$i]->getPassword()) { ?><span
-                                        class="fa fa-check"></span><?php } else { ?><span
-                                        class="fa fa-times"></span><?php } ?></td>
-                            <td style="text-align:center;"><?php if ($users->getUsers()[$i]->getAdmin()) { ?><span
-                                        class="fa fa-check"></span><?php } else { ?><span
-                                        class="fa fa-times"></span><?php } ?></td>
-                            <td style="text-align:center;"><?php if ($users->getUsers()[$i]->getSuperAdmin()) { ?><span
-                                        class="fa fa-check"></span><?php } else { ?><span
-                                        class="fa fa-times"></span><?php } ?></td>
-                            <td style="text-align:center;">
+                            <th>Felhasználónév</th>
+                            <th>Név</th>
+                            <th style="text-align:center;">AuthSCH</th>
+                            <th style="text-align:center;">Sima jelszó</th>
+                            <th style="text-align:center;">Adminja</th>
+                            <th style="text-align:center;">Super-admin</th>
+                            <th style="text-align:center;">Műveletek</th>
+                        </tr>
+                        <?php
+                        for ($i = 0; $i < $users->getUserNum(); $i++) {
+                            ?>
+                            <tr>
+                                <td><?= $users->getUsers()[$i]->getUsername(); ?></td>
+                                <td><?= $users->getUsers()[$i]->getName(); ?></td>
+                                <td style="text-align:center;"><?php if ($users->getUsers()[$i]->getUuid()) { ?><span
+                                            class="fa fa-check"></span><?php } else { ?><span
+                                            class="fa fa-times"></span><?php } ?></td>
+                                <td style="text-align:center;"><?php if ($users->getUsers()[$i]->getPassword()) { ?>
+                                        <span
+                                                class="fa fa-check"></span><?php } else { ?><span
+                                            class="fa fa-times"></span><?php } ?></td>
+                                <td style="text-align:center;">
+                                    <?php
+                                    if ($users->getUsers()[$i]->getAdmin() == false) {
+                                        ?>
+                                        <i>Nem admin</i>
+                                        <?php
+                                    } else {
+                                        $first = true;
+                                        foreach ($locations->getLocations() as $location) {
+                                            if ($users->getUsers()[$i]->isAdminOf($location->getId())) {
+                                                if ($first == false) {
+                                                    echo ", ";
+                                                }
+                                                echo $location->getName();
+                                                $first = false;
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                </td>
+                                <td style="text-align:center;"><?php if ($users->getUsers()[$i]->getSuperAdmin()) { ?>
+                                        <span
+                                                class="fa fa-check"></span><?php } else { ?><span
+                                            class="fa fa-times"></span><?php } ?></td>
+                                <td style="text-align:center;">
                                 <span data-target="#userPw<?= $users->getUsers()[$i]->getId(); ?>"
-                                                                 title="Jelszó módosítás" data-toggle="modal">
+                                      title="Jelszó módosítás" data-toggle="modal">
                                     <a role="button" class="btn btn-default" data-toggle="tooltip"
                                        data-original-title="Jelszó módisítása" data-placement="top">
                                         <i class="fa fa-star"></i>
                                     </a>
                                 </span>
-                                <?php
-                                if ($users->getUsers()[$i]->getAdmin()) {
+                                    <span data-target="#userAdmin<?= $users->getUsers()[$i]->getId() ?>"
+                                          title="Admin jogosultságok módosítása" data-toggle="modal">
+                                    <a role="button" class="btn btn-default" data-toggle="tooltip"
+                                       data-original-title="Admin jogosultságok módosítása" data-placement="top">
+                                        <i class="fa fa-user-circle"></i>
+                                    </a>
+                                </span>
+                                    <?php
+                                    if ($users->getUsers()[$i]->getSuperAdmin()) {
+                                        ?>
+                                        <form style="display:inline-block;" action="/admin/change_user"
+                                              method="POST">
+                                            <input type="hidden" name="id"
+                                                   value="<?= $users->getUsers()[$i]->getId(); ?>"/>
+                                            <input type="hidden" name="type" value="superadmin"/>
+                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip"
+                                                    data-placement="top"
+                                                    data-original-title="Superadmin jogosultság megvonása">
+                                                <span class="fa fa-user"></span>
+                                            </button>
+                                        </form>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <form style="display:inline-block;" action="/admin/change_user"
+                                              method="POST">
+                                            <input type="hidden" name="id"
+                                                   value="<?= $users->getUsers()[$i]->getId(); ?>"/>
+                                            <input type="hidden" name="type" value="superadmin"/>
+                                            <button type="submit" class="btn btn-default" data-toggle="tooltip"
+                                                    data-placement="top"
+                                                    data-original-title="Superadmin jogosultság megadása">
+                                                <span class="fa fa-user-o"></span>
+                                            </button>
+                                        </form>
+                                        <?php
+                                    }
                                     ?>
-                                    <form style="display:inline-block;" action="/admin/change_user"
-                                          method="POST">
-                                        <input type="hidden" name="id" value="<?= $users->getUsers()[$i]->getId(); ?>"/>
-                                        <input type="hidden" name="type" value="admin"/>
-                                        <button type="submit" class="btn btn-primary" data-toggle="tooltip"
-                                                data-placement="top" data-original-title="Admin jogosultság megvonása">
-                                            <span class="fa fa-user"></span>
+                                    <form style="display:inline-block;" action="/admin/change_user" method="POST">
+                                        <input type="hidden" name="type" value="delete">
+                                        <input type="hidden" name="id" value="<?= $users->getUsers()[$i]->getId(); ?>">
+                                        <button type="submit" class="btn btn-danger" data-toggle="tooltip"
+                                                data-placement="top" data-original-title="Felhasználó törlése">
+                                            <span class="fa fa-user-times"></span>
                                         </button>
                                     </form>
-                                    <?php
-                                } else {
-                                    ?>
-                                    <form style="display:inline-block;" action="/admin/change_user"
-                                          method="POST">
-                                        <input type="hidden" name="id" value="<?= $users->getUsers()[$i]->getId(); ?>"/>
-                                        <input type="hidden" name="type" value="admin"/>
-                                        <button type="submit" class="btn btn-default" data-toggle="tooltip"
-                                                data-placement="top" data-original-title="Admin jogosultság megadása">
-                                            <span class="fa fa-user-o"></span>
-                                        </button>
-                                    </form>
-                                    <?php
-                                }
-                                ?>
-                                <?php
-                                if ($users->getUsers()[$i]->getSuperAdmin()) {
-                                    ?>
-                                    <form style="display:inline-block;" action="/admin/change_user"
-                                          method="POST">
-                                        <input type="hidden" name="id" value="<?= $users->getUsers()[$i]->getId(); ?>"/>
-                                        <input type="hidden" name="type" value="superadmin"/>
-                                        <button type="submit" class="btn btn-primary" data-toggle="tooltip"
-                                                data-placement="top"
-                                                data-original-title="Superadmin jogosultság megvonása">
-                                            <span class="fa fa-user"></span>
-                                        </button>
-                                    </form>
-                                    <?php
-                                } else {
-                                    ?>
-                                    <form style="display:inline-block;" action="/admin/change_user"
-                                          method="POST">
-                                        <input type="hidden" name="id" value="<?= $users->getUsers()[$i]->getId(); ?>"/>
-                                        <input type="hidden" name="type" value="superadmin"/>
-                                        <button type="submit" class="btn btn-default" data-toggle="tooltip"
-                                                data-placement="top"
-                                                data-original-title="Superadmin jogosultság megadása">
-                                            <span class="fa fa-user-o"></span>
-                                        </button>
-                                    </form>
-                                    <?php
-                                }
-                                ?>
-                                <form style="display:inline-block;" action="/admin/change_user" method="POST">
-                                    <input type="hidden" name="type" value="delete">
-                                    <input type="hidden" name="id" value="<?= $users->getUsers()[$i]->getId(); ?>">
-                                    <button type="submit" class="btn btn-danger" data-toggle="tooltip"
-                                            data-placement="top" data-original-title="Felhasználó törlése">
-                                        <span class="fa fa-user-times"></span>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php
-                    }
-                    ?>
-                </table>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </table>
                 </div>
             </div>
         </div>
@@ -166,6 +169,52 @@ $log = new Log($current_user->getId(), "admin users", "view");
 <?php
 for ($i = 0; $i < $users->getUserNum(); $i++) {
     ?>
+    <div class="modal fade" id="userAdmin<?= $users->getUsers()[$i]->getId(); ?>" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/admin/change_user" method="POST">
+                    <input type="hidden" name="id" value="<?= $users->getUsers()[$i]->getId(); ?>" role="dialog">
+                    <input type="hidden" name="type" value="admin">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Admin jogosultságok megváltoztatása</h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table modal-table">
+                            <tr>
+                                <th>Helyszín</th>
+                                <th>Admin jogosultság</th>
+                            </tr>
+                            <?php
+                            foreach ($locations->getLocations() as $location) {
+                                ?>
+                                <tr>
+                                    <td>
+                                        <label for="<?= $users->getUsers()[$i]->getId() . "." . $location->getId(); ?>"><?= $location->getName(); ?></label>
+                                    </td>
+                                    <td style="width:90%;">
+                                        <input name="admin<?= $location->getId(); ?>"
+                                               id="<?= $users->getUsers()[$i]->getId() . "." . $location->getId(); ?>"
+                                               type="checkbox" <?php if ($users->getUsers()[$i]->isAdminOf($location->getId())) {
+                                            echo "checked";
+                                        } ?>>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="Küldés" role="button">
+                        <button role="button" class="btn btn-default" data-dismiss="modal">Mégse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="userPw<?= $users->getUsers()[$i]->getId(); ?>" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">

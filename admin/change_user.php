@@ -3,8 +3,10 @@ session_start();
 require_once("../includes/init.php");
 require_once("../includes/Users.php");
 require_once("../includes/Log.php");
+require_once("../includes/Locations.php");
 
 $users = new Users();
+$locations = new Locations();
 
 require_once("../includes/current_user.php");
 
@@ -32,7 +34,18 @@ if(isset($_POST['id']) && isset($_POST['type'])) {
     }
     if($_POST['type'] == "admin") {
         $log = new Log($current_user->getId(), "change user","admin: $id");
-        $users->getUserById($id)->setAdmin();
+        foreach($locations->getLocations() as $location){
+            $asd = "admin".$location->getId();
+            if(isset($_POST[$asd])){
+                if($users->getUserById($id)->isAdminOf($location->getId()) != true) {
+                    $users->getUserById($id)->addAdmin($location->getId());
+                }
+            }else{
+                if($users->getUserById($id)->isAdminOf($location->getId())) {
+                    $users->getUserById($id)->removeAdmin($location->getId());
+                }
+            }
+        }
     }
     if($_POST['type'] == "superadmin") {
         $log = new Log($current_user->getId(),"change user","super admin: $id");
