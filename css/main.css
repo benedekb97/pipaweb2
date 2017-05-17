@@ -61,3 +61,13 @@ ul.navbar-nav li a:hover{
 td{
     vertical-align:middle !important;
 }
+
+.modal-table{
+    color:#222;
+    font-size:11pt;
+    margin-top:10px;
+}
+
+.modal-body{
+    color:#444;
+}

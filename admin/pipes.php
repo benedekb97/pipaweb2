@@ -59,6 +59,7 @@ $log = new Log($current_user->getId(), "admin pipes", "view");
                         <th>Íz</th>
                         <th>Létrehozta</th>
                         <th>Létrehozva</th>
+                        <th style="text-align:center;">Műveletek</th>
                     </tr>
                     </thead>
                     <tfoot>
@@ -67,6 +68,7 @@ $log = new Log($current_user->getId(), "admin pipes", "view");
                         <th>Íz</th>
                         <th>Létrehozta</th>
                         <th>Létrehozva</th>
+                        <th style="text-align:center;">Műveletek</th>
                     </tr>
                     </tfoot>
                     <tbody>
@@ -78,6 +80,13 @@ $log = new Log($current_user->getId(), "admin pipes", "view");
                             <td><?= $pipe->getType(); ?></td>
                             <td><?= $users->getUserById($pipe->getCreatedBy())->getName(); ?></td>
                             <td><?= $pipe->getCreatedAt(); ?></td>
+                            <td style="text-align:center;">
+                                <span data-toggle="tooltip" data-placement="top" data-original-title="Pipa törlése">
+                                    <button data-toggle="modal" data-target="#deletePipe<?= $pipe->getId(); ?>" class="btn btn-danger">
+                                            <i class="fa fa-times"></i>
+                                    </button>
+                                </span>
+                            </td>
                         </tr>
                         <?php
                     }
@@ -88,11 +97,58 @@ $log = new Log($current_user->getId(), "admin pipes", "view");
         </div>
     </div>
 </div>
+<?php
+foreach($pipes->getPipes() as $pipe){
+    ?>
+    <div class="modal fade" id="deletePipe<?= $pipe->getId(); ?>" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Pipa törlése</h4>
+                </div>
+                <div class="modal-body">
+                    Biztosan törölni akarod a pipát?
+                    <table class="table modal-table">
+                        <tr>
+                            <td>Azonosító</td>
+                            <td><?= $pipe->getId(); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Dohány</td>
+                            <td><?= $pipe->getType(); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Létrehozta</td>
+                            <td><?= $users->getUserById($pipe->getCreatedBy())->getName(); ?></td>
+                        </tr>
+                        <tr>
+                            <td>Létrehozva</td>
+                            <td><?= $pipe->getcreatedAt(); ?></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <form action="delete_pipe" method="POST">
+                        <button type="button" class="btn btn-success" data-dismiss="modal" aria-label="Nem">Mégse</button>
+                        <input type="hidden" name="id" value="<?= $pipe->getId(); ?>">
+                        <input type="submit" value="Igen" class="btn btn-danger">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<?php
+}
+?>
 <?php include("../includes/footer.php"); ?>
 <script type="text/javascript" language="javascript" src="/js/dataTables.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#pipes').dataTable( { "order": [[ 3, "desc" ]] } );
+        $('#pipes').dataTable({"order": [[3, "desc"]]});
+        $('[data-toggle="tooltip"]').tooltip();
     })
 </script>
 </body>

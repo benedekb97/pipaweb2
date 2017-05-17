@@ -85,4 +85,11 @@ class Pipes
         }
         return null;
     }
+
+    public function deletePipe($id)
+    {
+        global $mysql;
+
+        $mysql->query("DELETE FROM pipes WHERE id='$id'");
+    }
 }

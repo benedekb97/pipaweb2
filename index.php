@@ -32,6 +32,13 @@ if(!isset($_GET['location'])){
 if ($pipes->getCurrentPipe($current_location->getId()) != null) {
     $current_pipe = $pipes->getCurrentPipe($current_location->getId());
 }
+
+$statuses = [
+        "ok"=>"Jó",
+        "dying"=>"Haldoklik",
+        "dead"=>"Halott",
+        "starting"=>"Készül"
+    ]
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -125,7 +132,7 @@ if ($pipes->getCurrentPipe($current_location->getId()) != null) {
                             </tr>
                             <tr>
                                 <th>Állapot:</th>
-                                <td><?= $current_pipe->getStatus(); ?></td>
+                                <td><?= $statuses[$current_pipe->getStatus()]; ?></td>
                             </tr>
                         </table>
                     <?php
@@ -157,7 +164,7 @@ if ($pipes->getCurrentPipe($current_location->getId()) != null) {
                             </tr>
                             <tr>
                                 <th>Állapot:</th>
-                                <td><?= $current_pipe->getStatus(); ?></td>
+                                <td><?= $statuses[$current_pipe->getStatus()]; ?></td>
                             </tr>
                         </table>
                         <?php
