@@ -1,12 +1,12 @@
 <?php
 session_start();
-include("includes/init.php");
-include("includes/Users.php");
-include("includes/Log.php");
+require_once("includes/init.php");
+require_once("includes/Users.php");
+require_once("includes/Log.php");
 
 $users = new Users();
 
-include("includes/current_user.php");
+require_once("includes/current_user.php");
 
 if (!(isset($current_user))) {
     header("Location: /?login=true");

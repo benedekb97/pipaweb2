@@ -1,5 +1,7 @@
 <?php
 
+require_once("Locations.php");
+
 class User
 {
     private $id;
@@ -121,5 +123,10 @@ class User
         }
 
         $mysql->query("UPDATE users SET super_admin='$new_super_admin' WHERE id='$this->id'");
+    }
+
+    public function isAdminOf($location_id)
+    {
+
     }
 }

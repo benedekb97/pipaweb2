@@ -1,14 +1,14 @@
 <?php
 session_start();
-include("../includes/init.php");
-include("../includes/Users.php");
-include("../includes/Pipes.php");
-include("../includes/Log.php");
+require_once("../includes/init.php");
+require_once("../includes/Users.php");
+require_once("../includes/Pipes.php");
+require_once("../includes/Log.php");
 
 $users = new Users();
 $pipes = new Pipes();
 
-include("../includes/current_user.php");
+require_once("../includes/current_user.php");
 
 if (!(isset($current_user) && $current_user->getSuperAdmin())) {
     header("Location: /?login=true");
@@ -22,11 +22,11 @@ $log = new Log($current_user->getId(), "admin", "view");
 <html lang="en">
 <head>
     <title>Pipa.ml - Admin</title>
-    <?php include("../includes/head.php"); ?>
+    <?php require_once("../includes/head.php"); ?>
 </head>
 <body>
 <div class="container">
-    <?php include("../includes/nav.php"); ?>
+    <?php require_once("../includes/nav.php"); ?>
     <div class="row">
         <div class="col-lg-3">
             <div class="panel panel-default">
@@ -61,6 +61,6 @@ $log = new Log($current_user->getId(), "admin", "view");
         </div>
     </div>
 </div>
-<?php include("../includes/footer.php"); ?>
+<?php require_once("../includes/footer.php"); ?>
 </body>
 </html>

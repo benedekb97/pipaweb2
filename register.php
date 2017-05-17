@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-include("includes/init.php");
+require_once("includes/init.php");
 
-include("includes/Users.php");
-include("includes/Locations.php");
-include("includes/Pipes.php");
-include("includes/Log.php");
+require_once("includes/Users.php");
+require_once("includes/Locations.php");
+require_once("includes/Pipes.php");
+require_once("includes/Log.php");
 
 //perperlol
 
@@ -16,7 +16,7 @@ $pipes = new Pipes();
 $log = new Log(0, "index", "view");
 
 
-include("includes/current_user.php");
+require_once("includes/current_user.php");
 
 if (isset($current_user)) {
     die("403 - Not authorized!");
@@ -27,11 +27,11 @@ if (isset($current_user)) {
 <html lang="en">
 <head>
     <title>Felhasználónév igénylése</title>
-    <?php include("includes/head.php"); ?>
+    <?php require_once("includes/head.php"); ?>
 </head>
 <body>
 <div class="container">
-    <?php include("includes/nav.php"); ?>
+    <?php require_once("includes/nav.php"); ?>
     <div class="row">
         <div class="col-lg-6 col-lg-push-3">
             <div class="panel panel-default">
@@ -90,7 +90,7 @@ if (isset($current_user)) {
         </div>
     </div>
 </div>
-<?php include("includes/login_modal.php"); ?>
-<?php include("includes/footer.php"); ?>
+<?php require_once("includes/login_modal.php"); ?>
+<?php require_once("includes/footer.php"); ?>
 </body>
 </html>

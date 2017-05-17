@@ -1,16 +1,16 @@
 <?php
 session_start();
-include("../includes/init.php");
-include("../includes/Users.php");
-include("../includes/Pipes.php");
-include("../includes/Log.php");
-include("../includes/Locations.php");
+require_once("../includes/init.php");
+require_once("../includes/Users.php");
+require_once("../includes/Pipes.php");
+require_once("../includes/Log.php");
+require_once("../includes/Locations.php");
 
 $users = new Users();
 $pipes = new Pipes();
 $locations = new Locations();
 
-include("../includes/current_user.php");
+require_once("../includes/current_user.php");
 
 if (!(isset($current_user) && $current_user->getSuperAdmin())) {
     header("Location: /index?login=true");
@@ -24,12 +24,12 @@ $log = new Log($current_user->getId(), "admin pipes", "view");
 <html lang="en">
 <head>
     <title>Pipa.ml - Pipák</title>
-    <?php include("../includes/head.php"); ?>
+    <?php require_once("../includes/head.php"); ?>
     <link rel="stylesheet" type="text/css" href="/css/dataTables.min.css"/>
 </head>
 <body>
 <div class="container">
-    <?php include("../includes/nav.php"); ?>
+    <?php require_once("../includes/nav.php"); ?>
     <div class="row">
         <div class="col-lg-3">
             <div class="panel panel-default">
@@ -152,7 +152,7 @@ foreach ($pipes->getPipes() as $pipe) {
     <?php
 }
 ?>
-<?php include("../includes/footer.php"); ?>
+<?php require_once("../includes/footer.php"); ?>
 <script type="text/javascript" language="javascript" src="/js/dataTables.min.js"></script>
 <script>
     $(document).ready(function () {
