@@ -54,56 +54,59 @@ $log = new Log($current_user->getId(), "admin pipes", "view");
                 <div class="panel-heading">
                     <h4 class="panel-title">Pipák</h4>
                 </div>
-                <table id="pipes" class="table">
-                    <thead>
-                    <tr>
-                        <th>Azonosító</th>
-                        <th>Íz</th>
-                        <th>Létrehozta</th>
-                        <th>Létrehozva</th>
-                        <th>Helyszín</th>
-                        <th style="text-align:center;">Műveletek</th>
-                    </tr>
-                    </thead>
-                    <tfoot>
-                    <tr>
-                        <th>Azonosító</th>
-                        <th>Íz</th>
-                        <th>Létrehozta</th>
-                        <th>Létrehozva</th>
-                        <th>Helyszín</th>
-                        <th style="text-align:center;">Műveletek</th>
-                    </tr>
-                    </tfoot>
-                    <tbody>
-                    <?php
-                    foreach ($pipes->getPipes() as $pipe) {
-                        ?>
+                <div class="table-responsive">
+                    <table id="pipes" class="table">
+                        <thead>
                         <tr>
-                            <td><?= $pipe->getId(); ?></td>
-                            <td><?= $pipe->getType(); ?></td>
-                            <td><?= $users->getUserById($pipe->getCreatedBy())->getName(); ?></td>
-                            <td><?= $pipe->getCreatedStatic(); ?></td>
-                            <td><?= $locations->getLocationById($pipe->getLocation())->getName(); ?></td>
-                            <td style="text-align:center;">
+                            <th>Azonosító</th>
+                            <th>Íz</th>
+                            <th>Létrehozta</th>
+                            <th>Létrehozva</th>
+                            <th>Helyszín</th>
+                            <th style="text-align:center;">Műveletek</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Azonosító</th>
+                            <th>Íz</th>
+                            <th>Létrehozta</th>
+                            <th>Létrehozva</th>
+                            <th>Helyszín</th>
+                            <th style="text-align:center;">Műveletek</th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        <?php
+                        foreach ($pipes->getPipes() as $pipe) {
+                            ?>
+                            <tr>
+                                <td><?= $pipe->getId(); ?></td>
+                                <td><?= $pipe->getType(); ?></td>
+                                <td><?= $users->getUserById($pipe->getCreatedBy())->getName(); ?></td>
+                                <td><?= $pipe->getCreatedStatic(); ?></td>
+                                <td><?= $locations->getLocationById($pipe->getLocation())->getName(); ?></td>
+                                <td style="text-align:center;">
                                 <span data-toggle="tooltip" data-placement="top" data-original-title="Pipa törlése">
-                                    <button data-toggle="modal" data-target="#deletePipe<?= $pipe->getId(); ?>" class="btn btn-danger">
+                                    <button data-toggle="modal" data-target="#deletePipe<?= $pipe->getId(); ?>"
+                                            class="btn btn-danger">
                                             <i class="fa fa-times"></i>
                                     </button>
                                 </span>
-                            </td>
-                        </tr>
-                        <?php
-                    }
-                    ?>
-                    </tbody>
-                </table>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <?php
-foreach($pipes->getPipes() as $pipe){
+foreach ($pipes->getPipes() as $pipe) {
     ?>
     <div class="modal fade" id="deletePipe<?= $pipe->getId(); ?>" role="dialog">
         <div class="modal-dialog">
@@ -136,7 +139,8 @@ foreach($pipes->getPipes() as $pipe){
                 </div>
                 <div class="modal-footer">
                     <form action="delete_pipe" method="POST">
-                        <button type="button" class="btn btn-success" data-dismiss="modal" aria-label="Nem">Mégse</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" aria-label="Nem">Mégse
+                        </button>
                         <input type="hidden" name="id" value="<?= $pipe->getId(); ?>">
                         <input type="submit" value="Igen" class="btn btn-danger">
                     </form>
@@ -145,7 +149,7 @@ foreach($pipes->getPipes() as $pipe){
         </div>
 
     </div>
-<?php
+    <?php
 }
 ?>
 <?php include("../includes/footer.php"); ?>

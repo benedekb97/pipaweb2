@@ -51,6 +51,7 @@ $log = new Log($current_user->getId(), "admin users", "view");
                 <div class="panel-heading">
                     <h4 class="panel-title">Felhasználók</h4>
                 </div>
+                <div class="table-responsive">
                 <table class="table table-striped">
                     <tr>
                         <th>Felhasználónév</th>
@@ -157,6 +158,7 @@ $log = new Log($current_user->getId(), "admin users", "view");
                     }
                     ?>
                 </table>
+                </div>
             </div>
         </div>
     </div>

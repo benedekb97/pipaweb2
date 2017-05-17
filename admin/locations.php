@@ -54,6 +54,7 @@ $log = new Log($current_user->getId(), "admin locations", "view");
                 <div class="panel-heading">
                     <h4 class="panel-title">Helyszínek</h4>
                 </div>
+                <div class="table-responsive">
                 <table id="locations" class="table">
                     <thead>
                     <tr>
@@ -103,6 +104,7 @@ $log = new Log($current_user->getId(), "admin locations", "view");
                     ?>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
