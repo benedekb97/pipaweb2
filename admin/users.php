@@ -65,13 +65,14 @@ $log = new Log($current_user->getId(), "admin users", "view");
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped">
-                        <tr>
+                        <tr style="font-size:10pt;">
                             <th>Felhasználónév</th>
                             <th>Név</th>
                             <th style="text-align:center;">AuthSCH</th>
                             <th style="text-align:center;">Sima jelszó</th>
                             <th style="text-align:center;">Adminja</th>
                             <th style="text-align:center;">Super-admin</th>
+                            <th style="text-align:center;">Vicc</th>
                             <th style="text-align:center;">Műveletek</th>
                         </tr>
                         <?php
@@ -81,12 +82,11 @@ $log = new Log($current_user->getId(), "admin users", "view");
                                 <td><?= $users->getUsers()[$i]->getUsername(); ?></td>
                                 <td><?= $users->getUsers()[$i]->getName(); ?></td>
                                 <td style="text-align:center;"><?php if ($users->getUsers()[$i]->getUuid()) { ?><span
-                                            class="fa fa-check"></span><?php } else { ?><span
-                                            class="fa fa-times"></span><?php } ?></td>
+                                            class="fa fa-check" style="font-size:9pt;"></span><?php } else { ?><span
+                                            class="fa fa-times" style="font-size:9pt;"><?php } ?></td>
                                 <td style="text-align:center;"><?php if ($users->getUsers()[$i]->getPassword()) { ?>
-                                        <span
-                                                class="fa fa-check"></span><?php } else { ?><span
-                                            class="fa fa-times"></span><?php } ?></td>
+                                        <span class="fa fa-check" style="font-size:9pt;"></span><?php } else { ?><span
+                                            class="fa fa-times" style="font-size:9pt;"><?php } ?></td>
                                 <td style="text-align:center;">
                                     <?php
                                     if ($users->getUsers()[$i]->getAdmin() == false) {
@@ -109,21 +109,36 @@ $log = new Log($current_user->getId(), "admin users", "view");
                                 </td>
                                 <td style="text-align:center;"><?php if ($users->getUsers()[$i]->getSuperAdmin()) { ?>
                                         <span
-                                                class="fa fa-check"></span><?php } else { ?><span
-                                            class="fa fa-times"></span><?php } ?></td>
+                                                class="fa fa-check" style="font-size:9pt;"></span><?php } else { ?><span
+                                            class="fa fa-times" style="font-size:9pt;"><?php } ?></td>
+
+                                <td style="text-align:center;">
+                                    <?php
+                                    if($users->getUsers()[$i]->getEasterEgg()){
+                                        ?>
+                                        <span class="fa fa-check" style="font-size:9pt;"></span><?php } else { ?><span
+                                            class="fa fa-times" style="font-size:9pt;"><?php } ?>
+                                </td>
                                 <td style="text-align:center;">
                                 <span data-target="#userPw<?= $users->getUsers()[$i]->getId(); ?>"
                                       title="Jelszó módosítás" data-toggle="modal">
-                                    <a role="button" class="btn btn-default" data-toggle="tooltip"
+                                    <a role="button" class="btn btn-xs btn-default" data-toggle="tooltip"
                                        data-original-title="Jelszó módisítása" data-placement="top">
                                         <i class="fa fa-star"></i>
                                     </a>
                                 </span>
                                     <span data-target="#userAdmin<?= $users->getUsers()[$i]->getId() ?>"
                                           title="Admin jogosultságok módosítása" data-toggle="modal">
-                                    <a role="button" class="btn btn-default" data-toggle="tooltip"
+                                    <a role="button" class="btn btn-xs btn-default" data-toggle="tooltip"
                                        data-original-title="Admin jogosultságok módosítása" data-placement="top">
                                         <i class="fa fa-user-circle"></i>
+                                    </a>
+                                </span>
+                                    <span data-target="#userEasterEgg<?= $users->getUsers()[$i]->getId() ?>"
+                                          title="Easter-egg módosítása" data-toggle="modal">
+                                    <a role="button" class="btn btn-xs btn-default" data-toggle="tooltip"
+                                       data-original-title="Easter-egg módosítása" data-placement="top">
+                                        <i class="fa fa-smile-o"></i>
                                     </a>
                                 </span>
                                     <?php
@@ -134,7 +149,7 @@ $log = new Log($current_user->getId(), "admin users", "view");
                                             <input type="hidden" name="id"
                                                    value="<?= $users->getUsers()[$i]->getId(); ?>"/>
                                             <input type="hidden" name="type" value="superadmin"/>
-                                            <button type="submit" class="btn btn-primary" data-toggle="tooltip"
+                                            <button type="submit" class="btn btn-xs btn-primary" data-toggle="tooltip"
                                                     data-placement="top"
                                                     data-original-title="Superadmin jogosultság megvonása">
                                                 <span class="fa fa-user"></span>
@@ -148,7 +163,7 @@ $log = new Log($current_user->getId(), "admin users", "view");
                                             <input type="hidden" name="id"
                                                    value="<?= $users->getUsers()[$i]->getId(); ?>"/>
                                             <input type="hidden" name="type" value="superadmin"/>
-                                            <button type="submit" class="btn btn-default" data-toggle="tooltip"
+                                            <button type="submit" class="btn btn-xs btn-default" data-toggle="tooltip"
                                                     data-placement="top"
                                                     data-original-title="Superadmin jogosultság megadása">
                                                 <span class="fa fa-user-o"></span>
@@ -160,11 +175,12 @@ $log = new Log($current_user->getId(), "admin users", "view");
                                     <form style="display:inline-block;" action="/admin/change_user" method="POST">
                                         <input type="hidden" name="type" value="delete">
                                         <input type="hidden" name="id" value="<?= $users->getUsers()[$i]->getId(); ?>">
-                                        <button type="submit" class="btn btn-danger" data-toggle="tooltip"
+                                        <button type="submit" class="btn btn-xs btn-danger" data-toggle="tooltip"
                                                 data-placement="top" data-original-title="Felhasználó törlése">
                                             <span class="fa fa-user-times"></span>
                                         </button>
                                     </form>
+
                                 </td>
                             </tr>
                             <?php
@@ -216,6 +232,34 @@ for ($i = 0; $i < $users->getUserNum(); $i++) {
                             }
                             ?>
                         </table>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" value="Küldés" role="button">
+                        <button role="button" class="btn btn-default" data-dismiss="modal">Mégse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="userEasterEgg<?= $users->getUsers()[$i]->getId(); ?>" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/admin/change_user" method="POST">
+                    <input type="hidden" name="id" value="<?= $users->getUsers()[$i]->getId(); ?>" role="dialog">
+                    <input type="hidden" name="type" value="easter_egg">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">Easter-egg módosítása</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">Easter egg</span>
+                                <textarea class="form-control" name="easter_egg_text"><?= $users->getUsers()[$i]->getEasterEgg(); ?></textarea>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-primary" value="Küldés" role="button">

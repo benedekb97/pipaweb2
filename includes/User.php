@@ -36,6 +36,13 @@ class User
         $this->easter_egg_id = $user_data['easter_egg_id'];
     }
 
+    public function setEasterEgg($easter_egg)
+    {
+        global $mysql;
+
+        $mysql->query("UPDATE users SET easter_egg_id='$easter_egg' WHERE id='$this->id'");
+    }
+
     public function checkLogin($password)
     {
         $hashed_password = sha1(md5($password) . $this->salt);

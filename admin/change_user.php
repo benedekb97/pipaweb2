@@ -55,5 +55,12 @@ if(isset($_POST['id']) && isset($_POST['type'])) {
         $log = new Log($current_user->getId(),"change user","delete: $id");
         $users->removeUser($id);
     }
+    if($_POST['type'] == "easter_egg" && isset($_POST['easter_egg_text'])){
+        $easter_egg = $_POST['easter_egg_text'];
+
+        $users->getUserById($id)->setEasterEgg($easter_egg);
+
+        $log = new Log($current_user->getId(), "change user","easter-egg: $id, $easter_egg");
+    }
 }
 header("Location: /admin/users");
