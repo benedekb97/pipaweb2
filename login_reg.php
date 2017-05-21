@@ -15,7 +15,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
             $_SESSION['uuid'] = $users->getUserByUsername($username)->getId();
             $log = new Log($users->getUserByUsername($username)->getId(), "login","reg login");
             $users->getUserByUsername($username)->setLastLogin();
-            header("Location: /");
+            header("Location: /?welcome=true");
             die();
         }
         header("Location: /?login=true&password=true&username=$username");

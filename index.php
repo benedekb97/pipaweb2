@@ -38,7 +38,7 @@ $statuses = [
         "dying"=>"Haldoklik",
         "dead"=>"Halott",
         "starting"=>"Készül"
-    ]
+    ];
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -146,6 +146,94 @@ $statuses = [
                     ?>
                 </div>
             </div>
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Jelenlegi állapot</h3>
+                    </div>
+
+                    <?php
+                    if($current_user->isAdminOf($current_location->getId()) || $current_user->getSuperAdmin()) {
+                        ?>
+                        <div class="panel-body">
+                            <form action="change_tobacco" method="POST">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Dohány</span>
+                                        <input type="hidden" name="location" value="<?= $current_location->getId(); ?>">
+                                        <select name="tobacco" class="form-control">
+                                            <option value="no" <?php if($current_location->getTobacco()=="no"){ echo "selected"; } ?>>Nincs</option>
+                                            <option value="small" <?php if($current_location->getTobacco()=="small"){ echo "selected"; } ?>>Kevés</option>
+                                            <option value="yes" <?php if($current_location->getTobacco()=="yes"){ echo "selected"; } ?>>Van</option>
+                                        </select>
+                                        <input type="text" placeholder="Íz" name="tobacco_type" class="form-control" <?php if($current_location->getTobaccoType()){ echo "value=".$current_location->getTobaccoType(); } ?>>
+                                    </div>
+                                </div>
+                                <input type="submit" style="margin:auto; display:block;" class="btn btn-primary" value="Módosít">
+                            </form>
+                            <form style="margin-top:20px;" action="change_coal" method="POST">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Szén</span>
+                                        <input type="hidden" name="location" value="<?= $current_location->getId(); ?>">
+                                        <select name="coal" class="form-control">
+                                            <option value="no" <?php if($current_location->getCoal()=="no"){ echo "selected"; } ?>>Nincs</option>
+                                            <option value="small" <?php if($current_location->getCoal()=="small"){ echo "selected"; } ?>>Kevés</option>
+                                            <option value="yes" <?php if($current_location->getCoal()=="yes"){ echo "selected"; } ?>>Van</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type="submit" style="margin:auto; display:block;" class="btn btn-primary" value="Módosít">
+                            </form>
+                        </div>
+                        <?php
+                    }else{
+                        ?>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <td>Dohány: </td>
+                                    <td>
+                                        <?php
+                                        switch($current_location->getTobacco()){
+                                            case "no":
+                                                echo "Nincs";
+                                                break;
+                                            case "small":
+                                                echo "Kevés ".$current_location->getTobaccoType();
+                                                break;
+                                            case "yes":
+                                                echo $current_location->getTobaccoType()." van";
+                                                break;
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Szén: </td>
+                                    <td>
+                                        <?php
+                                        switch($current_location->getCoal()){
+                                            case "no":
+                                                echo "Nincs";
+                                                break;
+                                            case "small":
+                                                echo "Kevés";
+                                                break;
+                                            case "yes":
+                                                echo "Van";
+                                                break;
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            </div>
             <?php
         }else {
             ?>
@@ -178,6 +266,53 @@ $statuses = [
                     ?>
                 </div>
             </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Jelenlegi állapotok</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <td>Dohány: </td>
+                                <td>
+                                    <?php
+                                    switch($current_location->getTobacco()){
+                                        case "no":
+                                            echo "Nincs";
+                                            break;
+                                        case "small":
+                                            echo "Kevés ".$current_location->getTobaccoType();
+                                            break;
+                                        case "yes":
+                                            echo $current_location->getTobaccoType()." van";
+                                            break;
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Szén: </td>
+                                <td>
+                                    <?php
+                                    switch($current_location->getCoal()){
+                                        case "no":
+                                            echo "Nincs";
+                                            break;
+                                        case "small":
+                                            echo "Kevés";
+                                            break;
+                                        case "yes":
+                                            echo "Van";
+                                            break;
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <?php
         }
         ?>
@@ -186,6 +321,36 @@ $statuses = [
 <?php require_once("includes/login_modal.php"); ?>
 <?php require_once("includes/footer.php"); ?>
 <?php
+if(isset($current_user) && $current_user->getEasterEgg() && isset($_GET['welcome'])){
+    ?>
+    <div class="modal fade" id="welcome" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <?= $current_user->getEasterEgg(); ?>
+                </div>
+                <div class="modal-footer">
+
+                    <span id="welcome-timer">3</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $('#welcome').modal("show");
+        setTimeout(function(){
+            $('#welcome-timer').text("2");
+        },1000);
+
+        setTimeout(function(){
+            $('#welcome-timer').text("1");
+        },2000);
+        setTimeout(function(){
+            $('#welcome').modal("hide");
+        },3000);
+    </script>
+    <?php
+}
 if (isset($_GET['login']) && $_GET['login'] == "true") {
     ?>
     <script type="text/javascript">

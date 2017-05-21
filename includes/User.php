@@ -14,6 +14,7 @@ class User
     private $last_login;
     private $name;
     private $admin_of;
+    private $easter_egg_id;
 
     public function __construct($id)
     {
@@ -32,6 +33,7 @@ class User
         $this->last_login = $user_data['last_login'];
         $this->name = $user_data['name'];
         $this->admin_of = $user_data['admin_of'];
+        $this->easter_egg_id = $user_data['easter_egg_id'];
     }
 
     public function checkLogin($password)
@@ -179,5 +181,10 @@ class User
         global $mysql;
 
         $mysql->query("UPDATE users SET name='$new_name' WHERE id='$this->id'");
+    }
+
+    public function getEasterEgg()
+    {
+        return $this->easter_egg_id;
     }
 }

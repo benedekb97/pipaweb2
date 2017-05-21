@@ -27,7 +27,7 @@ if(isset($data)){
         $users->getUserByUuid($internal_id)->setLastLogin();
         $log = new Log($id, "login", "AuthSCH login");
         $_SESSION['uuid'] = $id;
-        header("Location: /");
+        header("Location: /?welcome=true");
         die();
     }
 }
