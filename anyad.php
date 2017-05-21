@@ -8,12 +8,13 @@ $users = new Users();
 
 require_once("includes/current_user.php");
 
+sleep(1);
+
 if(isset($current_user)) {
     $log = new Log($current_user->getId(),"anyád","anyád");
 }else{
     $log = new Log(0,"anyád","anyád");
 }
 
-sleep(1);
 header("Location: /");
 die();
