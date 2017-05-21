@@ -7,9 +7,9 @@
                 <h4 class="modal-title">Bejelentkezés</h4>
             </div>
             <div class="modal-body">
-                <button class="btn btn-success" href="login_auth" onClick="window.location = '/login';">AuthSCH-val
+                <button class="btn btn-success" onClick="window.location = '/login';">AuthSCH-val
                 </button>
-                <hr size="2px">
+                <hr>
                 <form action="/login_reg" method="POST">
                     <div class="form-group">
                         <div class="input-group">
