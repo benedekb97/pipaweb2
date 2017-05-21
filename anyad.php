@@ -16,3 +16,4 @@ if(isset($current_user)) {
 
 sleep(1);
 header("Location: /");
+die();
