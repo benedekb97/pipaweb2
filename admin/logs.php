@@ -119,7 +119,7 @@ $log = new Log($current_user->getId(),"admin log","view");
 <script type="text/javascript" language="javascript" src="/js/dataTables.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#logs').dataTable({"order": [[3, "desc"]]});
+        $('#logs').dataTable();
         $('[data-toggle="tooltip"]').tooltip();
     })
 </script>
