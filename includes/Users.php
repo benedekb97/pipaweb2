@@ -6,6 +6,7 @@ class Users
 {
     private $users = array();
     private $num_users;
+    private $default_user;
 
     public function getUserById($id)
     {
@@ -14,7 +15,17 @@ class Users
                 return $this->users[$i];
             }
         }
-        return null;
+
+        if($id==0){
+            return $this->default_user;
+        }
+
+        return $this->default_user;
+    }
+
+    public function getDefaultUser()
+    {
+        return $this->default_user;
     }
 
     public function getUserByUsername($username)
@@ -56,6 +67,7 @@ class Users
                 $this->users[] = new User($row['id']);
                 $this->num_users++;
             }
+            $this->default_user = new User(0);
         }
     }
 

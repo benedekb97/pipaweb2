@@ -20,6 +20,7 @@ class User
     {
         global $mysql;
 
+
         $query = $mysql->query("SELECT * FROM users WHERE id='$id'");
         $user_data = $query->fetch_assoc();
 
@@ -34,6 +35,21 @@ class User
         $this->name = $user_data['name'];
         $this->admin_of = $user_data['admin_of'];
         $this->easter_egg_id = $user_data['easter_egg_id'];
+
+
+        if($id==0){
+            $this->id=0;
+            $this->username = "undefined";
+            $this->admin = 0;
+            $this->oauth_internal_id = null;
+            $this->super_admin = 0;
+            $this->salt = null;
+            $this->password_hashed = null;
+            $this->last_login = null;
+            $this->name = "Unknown";
+            $this->admin_of = null;
+            $this->easter_egg_id = null;
+        }
     }
 
     public function setEasterEgg($easter_egg)

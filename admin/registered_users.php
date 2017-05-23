@@ -25,6 +25,8 @@ if (!isset($current_user) || !$current_user->getSuperAdmin()) {
     die();
 }
 
+$log = new Log($current_user->getId(),"admin regs","view");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,6 +61,9 @@ if (!isset($current_user) || !$current_user->getSuperAdmin()) {
                                 echo "(".$regs->getRegNum().")";
                             }
                             ?></a>
+                    </li>
+                    <li>
+                        <a href="/admin/logs">Eseménynapló</a>
                     </li>
                 </ul>
             </div>

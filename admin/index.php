@@ -53,6 +53,9 @@ $log = new Log($current_user->getId(), "admin", "view");
                             }
                             ?></a>
                     </li>
+                    <li>
+                        <a href="/admin/logs">Eseménynapló</a>
+                    </li>
                 </ul>
             </div>
         </div>
