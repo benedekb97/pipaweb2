@@ -14,7 +14,7 @@ class OldLogs
         global $mysql;
         $this->mysql = $mysql;
 
-        $query = $this->mysql->query("SELECT * FROM logs");
+        $query = $this->mysql->query("SELECT * FROM logs ORDER BY timestamp DESC");
         while($row = $query->fetch_assoc()){
             $this->logs[] = new OldLog($row['id']);
             $this->num_logs++;
