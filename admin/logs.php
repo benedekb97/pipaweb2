@@ -101,7 +101,7 @@ $log = new Log($current_user->getId(),"admin log","view");
                             <tr>
                                 <td><?= $current_log->getTime(); ?></td>
                                 <td><?= $current_log->getPage(); ?></td>
-                                <td><?= $current_log->getData(); ?></td>
+                                <td><?= strip_tags($current_log->getData()); ?></td>
                                 <td><?= $users->getUserById($current_log->getUserId())->getName(); ?></td>
                                 <td><?= $current_log->getIp(); ?></td>
                             </tr>
