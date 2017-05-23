@@ -15,3 +15,4 @@ $mysql->query("SET NAMES utf8");
 
 $version = "0";
 $revision = "3";
+

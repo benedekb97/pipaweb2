@@ -1,6 +1,7 @@
 <?php
 
 require_once "Pipe.php";
+require_once "init.php";
 
 class Location
 {

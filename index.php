@@ -166,7 +166,7 @@ $statuses = [
                                             <option value="small" <?php if($current_location->getTobacco()=="small"){ echo "selected"; } ?>>Kevés</option>
                                             <option value="yes" <?php if($current_location->getTobacco()=="yes"){ echo "selected"; } ?>>Van</option>
                                         </select>
-                                        <input type="text" placeholder="Íz" name="tobacco_type" class="form-control" <?php if($current_location->getTobaccoType()){ echo "value=".$current_location->getTobaccoType(); } ?>>
+                                        <input type="text" placeholder="Íz" name="tobacco_type" class="form-control" <?php if($current_location->getTobaccoType()){ echo "value='".$current_location->getTobaccoType()."'"; } ?>>
                                     </div>
                                 </div>
                                 <input type="submit" style="margin:auto; display:block;" class="btn btn-primary" value="Módosít">

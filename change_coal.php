@@ -18,7 +18,7 @@ if(isset($current_user) && ($current_user->isAdminOf($location) || $current_user
 
         $locations->getLocationById($location)->setCoal($coal);
 
-        $log = new Log($current_user->getId(),"change tobacco",$location." coal: ".$coal);
+        $log = new Log($current_user->getId(),"change coal",$location." coal: ".$coal);
 
         header("Location: /?location=$location");
         die();
