@@ -19,14 +19,6 @@ class Pipe
         $settings = new Settings();
         $created_time = strtotime($this->created);
 
-        /*echo $created_time + $settings->getReadyTime();echo "ready<br>";
-        echo time();echo "<br>";
-        echo $created_time + $settings->getDyingTime();echo "dying<br>";
-        echo time();echo "<br>";
-        echo $created_time + $settings->getEndTime();echo "dead<br>";
-        echo time();echo "<br>";
-*/
-
         if($created_time + $settings->getReadyTime() > time()){
             return "starting";
         }elseif($created_time + $settings->getReadyTime() < time() && $created_time + $settings->getDyingTime() > time()){
